@@ -1,0 +1,96 @@
+\section{Marco teórico}
+
+Sea $\Omega$ un espacio de probabilidad
+
+\subsection{Variables aleatorias}
+En estadística para una función aleatoria $F$ se hace las
+siguientes definiciones:
+
+\subsubsection{Media}
+\begin{equation}
+    \label{eq:media}
+    \mean{F} = \int_{\Omega}F(\bullet)p(\bullet)d(\bullet) 
+\end{equation}
+
+\subsubsection{n-esimo momento central}
+
+\begin{equation}
+    \label{eq:n-momento}
+    \mean{\left(F^n - \mean{F}\right)^n}
+\end{equation}
+
+\subsubsection{Desviación estandar}
+\begin{equation}
+    \label{eq:std}
+    \sigma^2 = \mean{(F - \mean{F})^2} = \mean{F^2} - \mean{F}^2 
+\end{equation}
+
+\subsection{Errores de medición}
+Supongamos que se quiere calcular el error de una medición
+$E \pm a, a > 0; E = f(\bullet)$
+
+Si se tiene una distribución uniforme ($P(\bullet) = 1)$, entonces
+
+\begin{equation*}
+    \mean{E} = \int_{-a}^{a}E P(\bullet) d(\bullet) = 
+    \left[
+    \frac{1}{2} E^2
+    \right]_{-a}^{a} = 0
+\end{equation*}
+
+Ahora supongamos que se tiene $\bullet := (x_1, \cdots, x_n)$ y $E = f(\bullet)$,
+entonces podemos aproximar $E$ mediante series de Taylor, haciendo
+$\overline{\bullet} = (\overline{x_1}, \cdots, \overline{x_n})$, al rededor
+de $\mean{E}$:
+
+\newcommand{\pf}[1]{
+\left[
+ \frac{\partial f}{\partial x_#1}       
+    \right]_{x_#1 = \overline{x}_#1}
+}
+
+\begin{equation*}
+    E = \mean{E} + \sum_{i=1}^{N}
+    \pf{i}(x - \overline{x}_i) + O(\bullet)
+\end{equation*}
+
+\begin{equation}
+    \label{eq:aprox}
+    E = \sum_{i=1}^{N}
+    \pf{i}
+    (x - \overline{x}_i)
+\end{equation}
+
+Por lo que la desviación estándar de $E$ es:
+\begin{align*}
+  u_c^2 (E) &= \sigma^2 = \mean{E^2}-\mean{E}^2 = \int_{\Omega} {\left(
+    \sum_{i=1}^{N}
+    \pf{i}(x - \overline{x}_i)
+\right)}^2
+P(\bullet)d(\bullet)\\
+&= \int_\Omega \left[
+    \sum_{i=1}^{N}
+        \pf{i}^2{(x - \overline{x}_i)}^2
+        \right]P(\bullet)d(\bullet)
+        \\
+        +
+        &\int_{\Omega} \left[
+            \sum_{i=1}^{N} \sum_{j\neq i}^{N}
+        \pf{i} (x - \overline{x}_i)
+        \pf{j}(x - \overline{x}_j)
+        \right]
+        P(\bullet)d(\bullet)
+        \\
+\end{align*}
+
+Suponiendo que las probabilidades combinadas son independientes
+entonces el ultimo sumando de la ecuación anterior se reduce a:
+
+\begin{equation*}
+u_c^2(E) = \int_\Omega \sum_{i=1}^{N}
+        \left(
+        \pf{i}
+        \right)^2
+        {(x - \overline{x}_i)}^2
+        P(\bullet)d(\bullet)
+\end{equation*}
