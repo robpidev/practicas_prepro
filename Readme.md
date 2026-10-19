@@ -1,1 +1,0 @@
-# Prácticas rdel laboratorio de fisica

@@ -1,0 +1,152 @@
+\section{Variables aleatorias discretas}
+Para la deducción de las definiciones y ecuaciones de esta sección se seguirá
+según~\cite{swendsen2012introduction} en el capítulo 3.
+
+Un evento elemental es un resultado individual y exlusivo de un experimento, tal
+que puede ocurrir una y solamente uno a la vez, Ejem. cuando se lanza una
+moneda se tiene el resultado de que la moneda salga cara o sello.
+
+\subsection{Variable aleatorias}
+Sea $A = \set{a_j}_{j = 1}^N$ un conjunto de eventos elementales donde a cada
+evento $a_j$ se le asigna una probabilidad $P(a_j)$, que por
+simplicidad escribiremos (A, P(a)), a esto llamaremos
+\textit{Variable aleatoria discreta}, si los eventos elementales son
+números entonces a $(A, P(a))$ se le llama \textit{Número aleatorio}.
+Por definicion de probablidad, para cada elemento se debe cumplir
+
+\begin{equation}
+  0 \leq P(a_j) \leq 1
+  \label{eq:prob-elemental}
+\end{equation}
+
+Asi la probabilidad de todo el conjunto $A$ debe ser $1$, por lo que
+debe, cumplirse
+que
+
+\begin{equation}
+  \sum_{j = 1}^N P(a_j) = 1
+  \label{eq:prob-total}
+\end{equation}
+
+Que por simplicidad escribiremos
+
+\begin{equation}
+  \sum_{a} P(a) = 1
+  \label{eq:prob-total-sim}
+\end{equation}
+
+\subsection{Probablidad de multiples variables aleatorias discretas}
+Supongamos que se tienen dos eventos elementales
+$A=\set{a_i}_{i=1}^N$ y $B=\set{b_j}_{j=1}^M$,
+entonces la probabilidad conjunta para $a_i$ y $b_j$ es
+
+\begin{equation}
+  0 \leq P(a_i, b_j) \leq 1
+  \label{eq:prob-conjunta}
+\end{equation}
+
+y la probabilidad para todo el cunjunto de eventos elementales se debe cumplir
+
+\begin{equation}
+  \sum_{i=1}^N \sum_{j=1}^M P(a_i, b_j) = 1
+  \label{eq:prob-conjunta-total}
+\end{equation}
+
+que por simplicidad escribiremos
+
+\begin{equation}
+  \sum_{a} \sum_{b} P(a, b) = 1
+  \label{eq:prob-conjunta-total-sim}
+\end{equation}
+
+\subsubsection*{Probabilidad marginal}
+Si queremos recuperar la probablidad $P_A(a_j)$ al cual denominaremos
+\textit{Probablidad marginal}, es lógico que sumaremos todas las
+probablidades sobre $B$ así obtenemos
+
+\begin{equation}
+  P_A(a) = \sum_{b} P(a, b)
+  \label{eq:prob-marginal}
+\end{equation}
+
+\subsubsection*{Probabilidad condicional}
+Supongamos que queremos la probablidad de que ocurra el evento
+$a$ dado que ocurrio $b$ el cual notaremos como $P(a|b)$, asumiendo
+que que la probablidad $P_B(b) \neq 0$ entonces esta será
+
+\begin{equation}
+  P(a|b) = \frac{P(a,b)}{P_B(b)}
+  \label{eq:prob-condicional}
+\end{equation}
+
+% === Funciones aleatorias y Números Aleatorios ===
+\subsection{Funciones aleatorias de una variable y Números Aleatorios}
+Sea el conjunto de eventos elementales $A = \set{a_j}_{j = 1}^{N_A}$ junto a
+su probablidad $P(a_i)$, podemos definir sobre este número aleatorio
+una función númerica $F = \set{F(a_j)}_{j = 1}^{N_A}$ tal que
+
+\begin{equation}
+  P_F(f) = \sum_a \delta_{f,F(a)} P(a)
+  \label{eq:f-prob}
+\end{equation}
+
+el cual también será un número aleatorio.
+
+Supongamos ahora que se tiene dos números aleatorios $X, Y$, con probablidad
+$P(x, y)$ y se quiere una nueva función arbitraria $G(x, y)$, entonces
+la distribución de probablidad de $G$ esta dado como una suma sobre
+todas las combinaciónes de los eventeos $X$ y $Y$ con la delta de kronecker
+tomando cada uno de los eventos particulares correspondientes a $G$
+
+\begin{equation}
+  P_G(g) = \sum_{x}\sum_y\delta_{g, G(x, y)} P(x, y)
+  \label{eq:prob-g}
+\end{equation}
+
+\subsection{Media, Variancia y Desviación Estándar}
+
+La media o promedio de una función $F(A)$, sobre $(A, P(a))$ se define
+como
+
+\begin{equation}
+  \bk{F} = \sum_a F(a) P(a)
+  \label{eq:d-mean}
+\end{equation}
+
+De manera similar el $n$-ésimo momento se define
+
+\begin{equation}
+  \bk{F^n} = \sum_a F^n(a) P(a)
+  \label{eq:d-n-moment}
+\end{equation}
+
+Y el $n$-ésimo momento central
+
+\begin{equation}
+  \bk{(F - \bk{F})^n}
+  = \sum_a (F^n(a) - \bk{F}^n)(a) P(a)
+  \label{eq:d-central-moment}
+\end{equation}
+
+El segundo momento central se le denomina \textit{varianza}, $\sigma^2$ el cuál
+será
+
+\begin{align*}
+  \sigma^2 &= \bk{(F - \bk{F})^2}\\
+  &= \bk{F^2 - 2F\bk{F} + \bk{F}^2}\\
+  &= \sum_a (F^2 - 2F\bk{F} + \bk{F}^2)(a) P(a)\\
+  &= \sum_a F^2(a)P(a) - 2\bk{F}\sum_a F(a)P(a) + \bk{F}^2\sum_aP(a)\\
+  &= \bk{F^2} - 2\bk{F}\bk{F} + \bk{F}^2
+\end{align*}
+
+\begin{equation}
+  \therefore \sigma^2 = \bk{F^2} - \bk{F}^2
+  \label{eq:d-var}
+\end{equation}
+
+Con esto podemos definir la desviación estándar como $\sigma = \sqrt{\sigma^2}$
+
+\begin{equation}
+  \sigma = \sqrt{\bk{F^2} - \bk{F}^2}
+  \label{eq:d-std}
+\end{equation}

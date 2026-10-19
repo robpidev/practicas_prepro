@@ -1,0 +1,56 @@
+\documentclass[a4paper,12pt]{article}
+
+% Math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+% ==== Apa style ====
+\usepackage[spanish]{babel}
+%\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+
+% Bibliography
+\usepackage{csquotes}
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Margins
+\usepackage{geometry}
+\geometry{left=2cm, right=2cm, top=2cm, bottom=2cm}
+
+% comands
+\newcommand{\bk}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+
+% ======== hyperref ============
+\usepackage{xcolor}
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!50!black,
+  urlcolor=cyan!60!black,
+  filecolor=magenta!60!black
+]{hyperref}
+\author{Trres Tarrillo Rober}
+\title{Informe de prácticas}
+\begin{document}
+%  \doublespacing
+\maketitle
+\tableofcontents
+\newpage
+\input{c1p1-drv.tex}
+\input{c1p2-va-dis-mult.tex}
+\input{c1p3-va-con-mult.tex}
+\input{c1p3-mean.tex}
+
+\printbibliography{}
+\end{document}
