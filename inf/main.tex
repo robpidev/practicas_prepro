@@ -30,7 +30,10 @@
 % comands
 \newcommand{\bk}[1]{\left\langle #1 \right\rangle}
 \newcommand{\set}[1]{\left\{#1\right\}}
-
+\newcommand{\pti}[1]{\left.\frac{\partial #1}{\partial
+x_i}\right|_{\vec x = \vec\mu}}
+\newcommand{\ptj}[1]{\left.\frac{\partial #1}{\partial
+x_j}\right|_{\vec x = \vec\mu}}
 % ======== hyperref ============
 \usepackage{xcolor}
 \usepackage[
@@ -50,7 +53,7 @@
 \input{c1p1-drv.tex}
 \input{c1p2-va-dis-mult.tex}
 \input{c1p3-va-con-mult.tex}
-\input{c1p3-mean.tex}
+\input{c1p4-errors.tex}
 
 \printbibliography{}
 \end{document}

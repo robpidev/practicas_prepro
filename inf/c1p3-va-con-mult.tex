@@ -2,14 +2,117 @@
 Utilizando la misma lógica de las secciones anteriores, se puede
 hacer las siguientes definiciones para funciones aleatorias continuas.
 
-Sea $P(\vec{a}) \geq 0$ una función de densidad donde
+Sea $P(\vec{a}) \geq 0$ una función de probabilidad de densidad
 $\vec{a} \in \Omega = \set{(a_{1}, a_{2}, \ldots, a_{N}): a_i \in
 \mathbb{R} }$, y denotaremos como $d^N a$ al diferencial sobre $\Omega$,
 por lo que la probabilidad sobre $\Omega$ debe cumplir
 
 \begin{gather}
-  \int\cdots\int_{\Omega}  P(\vec{a})\, d^N a = 1
+  \int\dots\int_{\Omega}  P(\vec{a})\, da_1 \cdots d a_N = 1
   \label{eq:prob-aleatoria-continua}
 \end{gather}
 
-Ahora defininamos una función aleatoria condinua $F: \Omega \to \mathbb{R}$
+donde en vez de usar esta notación, usaremos la forma corta.
+
+\begin{equation}
+  \int_\Omega P(\vec{a})\,d^Na
+  \label{eq:eq-prob-random-continue}
+\end{equation}
+
+Ahora definamos una función aleatoria continua $F: \Omega \to \mathbb{R}$
+por lo que la media de $F$ será
+
+\begin{equation}
+  \bk{F} = \int_\Omega F(\vec{a}) P(\vec{a})\, d^Na
+  \label{eq:mean-con-mult}
+\end{equation}
+
+El $n$-esimo momento de $F$ será
+
+\begin{equation}
+  \bk{F^n} = \int_\Omega F^n(\vec{a}) P(\vec{a}) d^N\vec{a}
+  \label{eq:moment-con-mult}
+\end{equation}
+
+El $n$-simo momento central de $F$ será
+
+\begin{equation}
+  \bk{(F - \bk{F})^n}
+  \label{eq:n-central-moment-con-mult}
+\end{equation}
+
+Y la desviación estandar de $F$ será
+
+\begin{equation}
+  \sigma^2 = \bk{(F - \bk{F})^2} = \bk{F^2} - \bk{F}^2
+  \label{eq:std-con-mult}
+\end{equation}
+
+De manera análoga a la función delta de Kroneker se define
+la función delta $\delta_\epsilon(x)$ como sigue
+
+\begin{equation}
+  \delta_\epsilon (x) =
+  \begin{cases}
+    0 & \text{si } x < \epsilon\\
+    \frac{1}{2\epsilon} & \text{si } -\epsilon \leq x \leq \epsilon\\
+    0 & \text{si } x > \epsilon
+  \end{cases}
+  \label{eq:delta}
+\end{equation}
+
+Por lo que la integral sobre $[-\epsilon, \epsilon] \subset
+\Omega \subset \mathbb R$ será
+
+\begin{equation}
+  \int_{-\infty}^\infty \delta_\epsilon(cx - d)\, dx = \int_\Omega
+  \delta_\epsilon(cx - d) dx = \frac{1}{|c|}
+  \label{eq:delta-integral}
+\end{equation}
+
+Con esto la función \textit{Delta de Dirac} se puede definir como
+
+\begin{equation}
+  \delta(x) = \lim_{\epsilon \to 0} \delta_\epsilon(x)
+  \label{eq:delta-dirac}
+\end{equation}
+
+y así la integral de $f(x)\delta(c(x - x_0))$ sobre $\Omega$ será
+
+\begin{equation}
+  \int_{-\infty}^\infty f(x)\delta(c(x - x_0))\,dx = \frac{f(x_0)}{|c|}
+  \label{eq:dalta-dirac-integral}
+\end{equation}
+
+Asi tomando una función análitica sobre una región $x_0 \in \Omega$, y
+una función $g(x)$ análitica y derivable con ceros en
+$\left\{x_j\right\}_{j=1}^N$ y $g'(x_j) \neq 0 $, resulta que
+
+\begin{equation}
+  \int_{-\infty}^\infty f(x)\delta(g(x))\,dx = \sum_{j=1}^N
+  \frac{f(x_j)}{|g'(x_j)|}
+  \label{eq:delta-dirac-integral-2}
+\end{equation}
+
+suponiengo que se tiene dos variables aleatorias, $x$ y $y$,
+junto a su densidad de probablidad, $P(x, y)$, y se define una
+nueva variable aleatoria, $s$, la cual es alguna
+función sobre las variables aleatorias originales, $x$ y $y$,
+$s = f(x, y)$. Entonces la nueva funsión de densidad
+$P(s)$ puede ser escrita como:
+
+\begin{equation}
+  P(s) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} P(x, y)
+  \delta(s - f(x, y))\, dx dy
+  \label{eq:new-con-pdf}
+\end{equation}
+
+Por lo que integrando sobre $\Omega$ se obtiene la normalización
+
+\begin{align*}
+  \int_{-\infty}^{\infty} P(s)\, ds &=
+  \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}
+  \int_{-\infty}^{\infty} P(x, y) \delta(s - f(x, y))\, dx dy ds\\
+  &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} P(x, y)\, dx dy = 1
+  \label{eq:normalizacion-con-mult}
+\end{align*}

@@ -1,0 +1,131 @@
+\subsection{Propagación de error}
+Sea $F: \mathbb R^N \to \mathbb R$ una función continua cuya
+regla de correspondencia es $F = F(\vec{x})$
+tal que $\vec{x} = (x_1, \cdots, x_N) \in \mathbb R^N$ donde $x_j$ es
+una variable
+aleatoria continua, estas variables pueden estar asociadas
+a cualquier medición física experimental la cual tienen
+una de densidad de probabilidad conjunta $P(x)$. $F(\vec{x})$
+Puede ser expresado como la suma de su valor medio $\bk{F}$
+y una variación aleatoria o error $E(\vec{x})$:
+
+\begin{equation}
+  F(x) = \bk{F} + E(x) \implies E(x) = F(x) - \bk{F}
+  \label{eq:error-func}
+\end{equation}
+
+Calculando el valor medio de $E(x)$
+
+\begin{align*}
+  \bk{E} &= \bk{F - \bk{F}}\\
+  &= \int_\Omega \left(F(\vec{x}) - \bk{F}\right)P(\vec{x})d^Nx\\
+  &= \int_\Omega F(\vec{x})P(\vec{x})d^Nx
+  - \bk F\int_\Omega P(\vec{x})d^Nx\\
+  &=\bk F - \bk F \\
+  \therefore \bk{E} &= 0
+\end{align*}
+
+Ahora calculemos la varianza de $F$ en función de $E$,
+por lo que tendremos
+
+\begin{equation}
+  \sigma_E^2 = \bk{E^2} - \bk E^2 = \bk{E^2} = \int_\Omega
+  E^2(\vec{x}) P(\vec{x}) d^Nx
+  \label{eq:medition-variance}
+\end{equation}
+
+Pero necesitamos la regla de correspondencia de $E(\vec{x})$.
+Tomemos la ecuación~\ref{eq:error-func} la cual
+podemos aproximar por series de Taylor, para eso tomemos el valor
+medio $\mu_i = \bk{x_i}$,
+con estos valores tomemos el vector medio $\vec{\mu} = (\mu_1, \dots, \mu_N)$,
+por lo que si aproximamos a $F$ al rededor de $F(\vec{u})$
+
+\begin{equation}
+  F(x) = F(\vec\mu) + \sum_{i = 1}^N \pti{F} (x_i - \mu_i) +
+  \mathcal{O}((\vec{x}-\mu)^2)
+  \label{eq:taylor-f-aprox}
+\end{equation}
+
+Descartando los términos cuadráticos $\mathcal{O}(\vec{x}-\vec\mu)^2$
+por que se vuelven demasiado pequeños podemos calcular su valor medio
+
+\begin{equation}
+  \bk{F} \approx \bk{F(\vec\mu) + \sum_{i = 1}^N \pti{F} (x_i - \mu_i)}
+  = \bk{F(\vec\mu)} + \bk{\sum_{i = 1}^N \pti{F} (x_i - \mu_i)}
+  \label{eq:F-mean-value}
+\end{equation}
+
+se puede observar que $\bk{F(\mu)} = F(\mu)$ ademas identificando el segundo
+termino del lado derecho como $\bk{E(x)}$, Puesto qué
+
+\begin{equation*}
+  \bk{\sum_{i = 1}^N \pti{F} (x_i - \mu_i)}
+  = \sum_{i = 1}^N \pti{F} \int_\Omega (x_i - \mu_i)P(\vec x)\, d^N x
+  = \sum_{i = 1}^N \pti{F} (\underbrace{\bk {x_i}}_{\mu_i} - \mu_i)
+  = 0
+\end{equation*}
+
+La cuál es una ecuación aproximada de la ecuación (\ref{eq:error-func})
+
+\begin{equation}
+  \bk{F} \approx F(\mu)\quad \wedge \quad E(x) = \sum_{i = 1}^N
+  \pti{F} (x_i - \mu_i)
+  \label{eq:F-mean}
+\end{equation}
+
+Reemplazando $E(x)$ en la ecuación (\ref{eq:medition-variance})
+\begin{align*}
+  \sigma_F^2 &= \int_\Omega \left(
+    \sum_{i = 1}^N \pti{F} (x_i - \mu_i)
+  \right)^2 P(\vec x)\, d^Nx\\
+  &= \int_\Omega
+  \left(
+    \sum_{i = 1}^N \pti{F} (x_i - \mu_i)
+  \right)
+  \left(
+    \sum_{j = 1}^N \pti{F} (x_j - \mu_j)
+  \right)P(\vec x)\,d^Nx\\
+  &=\sum_{i=1}^N\left(\pti{F}\right)^2
+  \underbrace{\int_\Omega(x_i-u_i)^2d^Nx}_{\sigma^2_{x_i}}\\
+  &\qquad\qquad+\sum_{i=1}^N \sum_{j\neq i}^N\pti{F}\ptj{F}
+  \underbrace{
+    \int_\Omega(x_i -\mu_i)(x_j - \mu_j)P(\vec x)\, d^Nx
+  }_{\text{Cov}(x_i, x_j)}
+\end{align*}
+
+Si consideremos a $x_i$ y $y_i$ independientes
+(como podría ser medición de la longitud y temperatura), entonces
+${\text{Cov}(x_i, x_j)} = 0$, pues
+
+\begin{align*}
+  \text{Cov}(x_i, x_j) &= \int_\Omega (x_i - \mu_i)(x_j - \mu_j)
+  P(\vec x) d^Nx \\
+  &= \left(\int_\Omega (x_i - \mu_i)P(\vec x) d^Nx\right)
+  \left(\int_\Omega (x_j - \mu_j)P(\vec x) d^Nx\right)\\
+  &= \left(\underbrace{\bk {x_i}}_{\mu_i} - \mu_j\right)
+  \left(\underbrace{\bk {x_j}}_{\mu_j} - \mu_j\right)\\
+  \\
+  \therefore \text{Cov}(x_i, x_j) &= 0
+\end{align*}
+
+Con lo que finalmente para $F(x) = \bk F + E(x)$ podemos escribir como
+
+\begin{equation}
+  F(x) \approx \bk F \pm \sigma_F
+  \label{eq:error-std}
+\end{equation}
+
+Donde
+
+\begin{equation}
+  \bk F = F(\mu) \qquad \wedge \qquad \sigma_F =
+  \sqrt{\sum_{i=1}^N\left(\pti{F}\right)^2\sigma^2_{x_i}}
+  \label{eq:error-std-values}
+\end{equation}
+
+Para el caso discreto $\sigma^2_{x_i}$ se puede calcular como
+\begin{equation}
+  \sigma^2_{x_i} = \sum_x (x_i - \mu_i)^2 P(x)
+  \label{eq:discrete-std-x-i}
+\end{equation}

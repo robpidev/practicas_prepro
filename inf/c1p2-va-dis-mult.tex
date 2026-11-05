@@ -1,59 +1,94 @@
 \subsection{Funciones aleatorias Discretas de varias variables}
 
-Sea $ \mathcal A = \set {A_i}_{i=1}^M$ un conjunto de números aleatorios, donde
-$A_i = \set {a_{ij}}_{j=1}^{N_i}$ con probabilidad $P_{A_i}(a_{ij})$.
+Sea $\mathcal A = \set{A_i}_{i=1}^M$ un conjunto de $M$ variables aleatorias
+discretas, donde cada
+$A_i = \set{a_{i1}, a_{i2}, \ldots, a_{iN_i}}$ es el conjunto de eventos
+elementales o valores posibles de la $i$-ésima variable, con probabilidad
+$P_{A_i}(a_{ij})$.
 
-Ahora definamos el conjunto de eventos elementales $\Omega_j$ para
-$\mathcal B_j \neq \emptyset \subset \mathcal A$
-de $N_j$ elementos
-
+Ahora definamos el espacio muestral conjunto $\Omega$ como el producto
+cartesiano de los espacios individuales
 \begin{equation}
-  \Omega_j := \set {\vec a_j |
-    \vec a_j = (a_{j1}, a_{j2}, \ldots, a_{jN_j}), a_{jk} \in A_{jk},
-  A_{jk} \in \mathcal B_j}
-  \label{eq:omega_j}
+  \Omega := A_1 \times A_2 \times \cdots \times A_M
+  = \set{\vec a = (a_1, a_2, \ldots, a_M) : a_i \in A_i}
+  \label{eq:omega_total}
 \end{equation}
 
-Es obvio que debemos exigir también que
-
-Sobre este conjunto
-se definen un conjunto de funciones aleatorias $F = \set {F_j}_{j=1}^N$ tal que
-
+Sobre este espacio se define la probabilidad conjunta
+$P(\vec a) = P(a_1, \ldots, a_M)$, la cual debe cumplir las condiciones de no
+negatividad y normalización
 \begin{equation}
-  F_j := \set {F_j(\vec a) :
-    \vec a \in \Omega_j
-  }
-  \label{eq:f-set}
+  P(\vec a) \ge 0 \quad \forall \vec a \in \Omega
+  \quad \wedge \quad
+  \sum_{\vec a \in \Omega} P(\vec a) = 1
+  \label{eq:prob-normalization}
 \end{equation}
 
-Con probabilidad marginal $P_{\Omega_j}(\vec{a})$ para cada
-$F_j(\vec{a})$, por lo que su media es:
+Si consideramos un subconjunto de variables sobre el subespacio
+$\Omega_j \subseteq \Omega$, la probabilidad marginal para una configuración
+$\vec a \in \Omega_j$ se obtiene sumando la probabilidad conjunta sobre las
+variables que no pertenecen a $\Omega_j$, esto es
 \begin{equation}
-  \bk{F_j} = \sum_{a_{j1}} \ldots \sum_{a_{jk}} F_j(\vec{a})
-  P_{\Omega_j}(\vec{a})
-  \equiv
-  \sum_{\vec{a} \in \Omega_j} F_j(\vec{a}) P_{\Omega_j}(\vec{a})
+  P_{\Omega_j}(\vec a)
+  = \sum_{\vec a' \notin \Omega_j} P(\vec a, \vec a')
+  \label{eq:prob-marginal-omega}
+\end{equation}
+
+Sobre este espacio se define un conjunto de funciones aleatorias
+$F = \set{F_j}_{j=1}^N$, donde cada $F_j: \Omega_j \to \mathbb{R}$ es una
+función escalar que asigna un valor real a cada evento $\vec a \in \Omega_j$.
+
+Usando la Delta de Kronecker $\delta_{f, F_j(\vec a)}$, la distribución de
+probabilidad $P_{F_j}(f)$, i.e. la probabilidad de que $F_j$ tome el valor
+específico $f$, se expresa como
+\begin{equation}
+  P_{F_j}(f)
+  = \sum_{\vec a \in \Omega_j} \delta_{f, F_j(\vec a)} \,
+  P_{\Omega_j}(\vec a)
+  \label{eq:prob-fj-kronecker}
+\end{equation}
+
+Con esta distribución, la media $\bk{F_j}$ está dada por
+\begin{equation}
+  \bk{F_j}
+  = \sum_f f \, P_{F_j}(f)
+  = \sum_f f \left(
+    \sum_{\vec a \in \Omega_j} \delta_{f, F_j(\vec a)} \,
+    P_{\Omega_j}(\vec a)
+  \right)
+  \label{eq:mean-fj-delta}
+\end{equation}
+
+\begin{equation}
+  \sum_f f \, \delta_{f, F_j(\vec a)} = F_j(\vec a)
+  \label{eq:kronecker-filtering}
+\end{equation}
+
+Intercambiando las sumas y usando la ecuación~\ref{eq:kronecker-filtering} se
+recupera la definición usual de la media:
+\begin{equation}
+  \bk{F_j}
+  = \sum_{\vec a \in \Omega_j} F_j(\vec a) \, P_{\Omega_j}(\vec a)
   \label{eq:mean:fj}
 \end{equation}
 
 Supongamos que se quiere una nueva variable aleatoria $S$:
-
 \begin{equation}
-  S = \sum_{j=1}^N F_j = \set { \sum _{j=1}^N F_j(a_{j1}, a_{j2},
-    \ldots, a_{jN_j})
-    : a_{jk} \in A_{jk}, A_{jk} \in \mathcal B_j
-  }
+  S(\vec a) = \sum_{j=1}^N F_j(\vec a), \quad \vec a \in \Omega
   \label{eq:s-set}
 \end{equation}
 
-Junto a la probabilidad $P(a_1, ..., a_M)$, entonces la media $S$ esta dada por
+Junto a la probabilidad $P(a_1, \ldots, a_M)$, entonces la media de $S$ está
+dada por
 
 \begin{align*}
   \bk S &= \bk{\sum_{j = 1}^N F_j}
-  = \sum_{a_1}\cdots \sum_{a_M} \sum_{j = 1}^N F_j(\vec{a}) P(a_1, ..., a_M)\\
-  &= \sum_{j = 1}^N \sum_{a_1} \cdots \sum_{a_M} F_j(\vec{a}) P(a_1, ..., a_M)
+  = \sum_{a_1}\cdots \sum_{a_M} \sum_{j = 1}^N F_j(\vec{a}) P(a_1,
+  \ldots, a_M)\\
+  &= \sum_{j = 1}^N \sum_{a_1} \cdots \sum_{a_M} F_j(\vec{a}) P(a_1,
+  \ldots, a_M)
   = \sum_{j = 1}^N \sum_{\vec{a} \in \Omega_j} F_j(\vec{a} )
-  \sum_{\vec{a} \not \in \Omega_j} P(a_1, ..., a_M) \\
+  \sum_{\vec{a} \not \in \Omega_j} P(a_1, \ldots, a_M) \\
 \end{align*}
 
 Pero las sumas sobre $\vec{a} \not \in \Omega_j$ dan la probabilidad marginal
@@ -64,13 +99,13 @@ $P_{\Omega_j}(\vec{a})$ por lo que
   P_{\Omega_j}(\vec{a})
 \end{align*}
 
-Y esta ultima es la media de $F_j$ por lo que la media de $S$ es igual a
+Y esta última es la media de $F_j$ por lo que la media de $S$ es igual a
 la suma de las medias
 
 \begin{equation}
   \bk S = \bk{\sum_{j = 1}^N F_j} = \sum_{j = 1}^N \bk{F_j}
   \label{eq:mean-s}
-\end{equation},
+\end{equation}
 
 Si todas las funciones aleatorias $F_j$ tienen la misma media, i.e.
 $\bk{F_j} = \bk{F}$, entonces
@@ -80,8 +115,8 @@ $\bk{F_j} = \bk{F}$, entonces
   \label{eq:mean-s-eq}
 \end{equation}
 
-\subsection{Varianza y Desviación Estandar de funciones aleatorias
-de varias variablse}
+\subsection{Varianza y Desviación Estándar de funciones aleatorias
+de varias variables}
 
 Ahora para calcular la varianza $\sigma^2_S$ de $S$ se puede utilizar
 la definición
@@ -91,11 +126,11 @@ la definición
   \sum_{j=1}^N F_j \sum_{k=1}^N F_k} - \sum_{j=1}^N \bk{F_j}
   \sum_{k=1}^N \bk{F_k}
   \\
-  &= \bk{\sum_{j=1}^N \sum_{k=1}^N F_jF_k} - \sum_{i=1}^N \bk{F_j}
+  &= \bk{\sum_{j=1}^N \sum_{k=1}^N F_jF_k} - \sum_{j=1}^N \bk{F_j}
   \sum_{k=1}^N \bk{F_k}
 \end{align*}
 
-utilizando la ecuación~\ref{eq:mean-s} esta ultima
+utilizando la ecuación~\ref{eq:mean-s} esta última
 igualdad se convierte en
 
 \begin{align}
@@ -107,10 +142,10 @@ Suponiendo que $F_j$ y $F_k$ son independientes por pares, podemos hacer
 
 \begin{align*}
   \sigma^2_S &= \sum_{j=1}^N \sum_{k\neq j}^N \bk{F_j}\bk{F_k}
-  + \sum_{j=1}^N \bk{F_j}^2 - \sum_{j=1}^N \bk{F_j}\sum_{j\neq k}^N \bk{F_k}
+  + \sum_{j=1}^N \bk{F_j^2} - \sum_{j=1}^N \bk{F_j}\sum_{k\neq j}^N \bk{F_k}
   - \sum_{j=1}^N \bk{F_j}^2
   = \sum_{j=1}^N \left(
-    \bk{F_j}^2 - \bk{F_j}^2
+    \bk{F_j^2} - \bk{F_j}^2
   \right)
 \end{align*}
 
@@ -143,7 +178,7 @@ Y por lo tanto
   \label{eq:std-s-eq}
 \end{equation}
 
-Y por lo tanto la desviación estandar relativa decrece con la raíz
+Y por lo tanto la desviación estándar relativa decrece con la raíz
 cuadrada del número de variables.
 
 \begin{equation}
