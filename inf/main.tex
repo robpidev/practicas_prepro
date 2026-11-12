@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 
 % Graphics
+\usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -14,7 +15,11 @@
 \usetikzlibrary{arrows.meta, positioning}
 
 % ==== Apa style ====
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\figurename}{Figura}%
+}
 %\usepackage{setspace}
 \usepackage[utf8]{inputenc}
 

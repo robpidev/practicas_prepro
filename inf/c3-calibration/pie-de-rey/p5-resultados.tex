@@ -1,0 +1,127 @@
+
+\subsubsection{Resultados numéricos de la calibración}
+\label{sec:pie-rey-resultados}
+
+Sustituyendo en la ley de propagación~\eqref{eq:sigma-final} las componentes
+estimadas en las secciones anteriores se obtiene el balance de incertidumbres de la
+indicación del pie de rey que se presenta en la
+Tabla~\ref{tab:pie-rey-balance}.
+
+\input{c3-calibration/pie-de-rey/tablas/t6.tex}
+
+La varianza combinada de la indicación, conforme a la
+ecuación~\eqref{eq:sigma-Li-total}, es la suma en cuadratura de las siete
+contribuciones evaluadas:
+
+\begin{equation}
+    \sigma^2(L_i) = \sigma^2(L_{i_E}) + \sigma^2(L_{i_R}) + \sigma^2(L_{i_S})
+    + \sigma^2(L_{i_L}) + \sigma^2(L_{i_J}) + \sigma^2(L_{i_K}) + \sigma^2(L_{i_r}),
+    \label{eq:sigma-Li-simbolico}
+\end{equation}
+
+es decir
+
+\begin{equation}
+    \sigma^2(L_i) =
+    \begin{aligned}
+        &\left(\frac{E}{2\sqrt{3}}\right)^2
+        + \left(\frac{s_R}{\sqrt{n}}\right)^2
+        + \left(\frac{\max(S_{E-I}, S_{E-P})}{2\sqrt{3}}\right)^2
+        + \left(\frac{L}{2\sqrt{3}}\right)^2 \\[4pt]
+        &\quad + \left(\frac{J}{2\sqrt{3}}\right)^2
+        + \left(\frac{K}{2\sqrt{3}}\right)^2
+        + \left(\frac{d/m}{\sqrt{3}}\right)^2 .
+    \end{aligned}
+    \label{eq:sigma-Li-simbolico-exp}
+\end{equation}
+
+Sustituyendo los valores obtenidos para cada componente,
+
+\begin{equation}
+    \sigma^2(L_i) = (14.43)^2 + (12.25)^2 + (9.62)^2 + (2.89)^2 + 0 + 0 + (14.43)^2
+    \ \mu\text{m}^2
+    \label{eq:sigma-Li-num}
+\end{equation}
+
+\begin{equation}
+    \therefore\ \sigma(L_i) \approx 25.84\ \mu\text{m}
+    \label{eq:sigma-Li-num-valor}
+\end{equation}
+
+El error de indicación del pie de rey es prácticamente independiente del valor
+patrón en las condiciones de trabajo: la diferencia de coeficientes de dilatación es
+nula ($\delta\alpha = 0$, ambos de acero) y la diferencia de temperaturas entre el
+bloque y el instrumento también lo es ($\delta T = 0$, ambos a $21.5\ ^\circ$C).
+Evaluando la ecuación~\eqref{eq:sigma-cuad-expandida} con esos valores, los
+coeficientes de sensibilidad $[1+\delta\alpha\,\Delta T_i]^2$ y
+$[-1+\alpha_{BP}\,\delta T]^2$ toman el valor unidad, mientras que los términos
+$[L_i\,\delta\alpha]^2$ y $[L_{BP}\,\delta T]^2$ se anulan por completo. Los dos
+restantes, asociados a $\sigma^2(\delta\alpha)$ y a $\sigma^2(\alpha_{BP})$, no se
+anulan pero resultan despreciables: el primero vale
+$9.4\times10^{-8}\ \mu\text{m}^2$ en el extremo del alcance
+(ecuación~\eqref{eq:termino-termico}) y el segundo es de orden $10^{-9}\ \mu\text{m}^2$,
+frente a $\sigma^2(L_i) = 667.6\ \mu\text{m}^2$. Con esa aproximación, la
+ecuación~\eqref{eq:sigma-cuad-expandida} se reduce a
+
+\begin{equation}
+    \sigma_c^2(E) = \sigma^2(L_i) + \sigma^2(L_{BP})
+    \label{eq:sigma-c-num}
+\end{equation}
+
+Al desaparecer del modelo todos los términos que llevan la longitud como factor, la
+varianza combinada deja de depender del valor nominal del punto de calibración. Si
+se dejan explícitas las componentes térmicas de la
+ecuación~\eqref{eq:sigma-cuad-expandida} como función de la longitud $L$, el modelo
+completo conduce a la forma cerrada
+
+\begin{equation}
+    U(E,L) = \sqrt{8.343\times10^{-11}\,L^2 + 2670.4}\ \mu\text{m},
+    \label{eq:U-vecL}
+\end{equation}
+
+con $L$ expresada en milímetros. El coeficiente del término cuadrático reúne el
+aporte de los términos térmicos, que resulta despreciable: en el extremo del alcance
+ensayado ($L = 250$ mm) contribuye con $9.4\times10^{-8}\ \mu\text{m}^2$ frente a los
+$2670.4\ \mu\text{m}^2$ del término independiente, de modo que $U(E)$ permanece
+constante en los cinco puntos de calibración.
+
+Sustituyendo el valor de la ecuación~\eqref{eq:sigma-LBP-total-valor}:
+
+\begin{equation}
+    \sigma_c(E) = \sqrt{25.84^2 + 0.126^2}\ \mu\text{m}
+    \approx 25.84\ \mu\text{m}
+    \label{eq:sigma-c-num-valor}
+\end{equation}
+
+Finalmente, la incertidumbre expandida con factor de cobertura $k = 2$ resulta
+
+\begin{equation}
+    U(E) = 2 \times 25.84\ \mu\text{m} \approx 51.68\ \mu\text{m}
+    \label{eq:U-num-valor}
+\end{equation}
+
+\subsubsection{Declaración de conformidad}
+
+El error máximo permitido del pie de rey 530-115 especificado por el fabricante es
+$\text{EMPE} = \pm 80\ \mu\text{m}$ para todo su alcance de $0$ a $300$ mm, aunque
+el ensayo cubrió de $50$ a $250$ mm. Dado que
+
+\begin{equation}
+    U(E) \approx 51.68\ \mu\text{m} < \text{EMPE} = 80\ \mu\text{m},
+    \qquad \frac{U(E)}{\text{EMPE}} \approx 0.65,
+    \label{eq:conformidad}
+\end{equation}
+
+la incertidumbre de la calibración es menor que la tolerancia del instrumento, por
+lo que el resultado permite decidir conformidad. Los cinco errores de indicación se
+mantienen por debajo del EMPE, con un máximo de $+28.2\ \mu\text{m}$ en $150$ mm, el
+$35$\,\% del límite permitido.
+
+La conformidad es, por tanto, ajustada. Adoptando la banda de aceptación de
+ILAC-G8, que exige $|E| \le \text{EMPE} - U \approx 28.3\ \mu\text{m}$, tres de los
+cinco puntos caen holgadamente dentro, mientras que los de $150$ mm y $200$ mm
+quedan en el borde de la zona de incertidumbre, donde el error está dentro de
+tolerancia pero la incertidumbre del método impide afirmar conformidad sin riesgo.
+El instrumento cumple, pero el margen disponible frente al EMPE es reducido y
+conviene repetir la calibración si el instrumento sufre golpes o desgaste
+apreciable.

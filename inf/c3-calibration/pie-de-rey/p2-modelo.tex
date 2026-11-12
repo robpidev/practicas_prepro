@@ -1,0 +1,115 @@
+\subsubsection{Deducción de las ecuaciones de medición e incertidumbre}
+
+Partiendo del modelo de medición definido en la Sección~\ref{sec:propagacion}, toda magnitud experimental continua $F(\vec{x})$ se descompone en su valor medio esperado $\langle F \rangle$ y una fluctuación o error aleatorio residual $E(\vec{x})$:
+
+\begin{equation}
+  F(\vec{x}) = \bk{F} + E(\vec{x}) \implies E(\vec{x}) = F(\vec{x}) - \bk{F}
+  \label{eq:modelo-base}
+\end{equation}
+
+En el procedimiento de calibración se busca cuantificar el \textbf{error de indicación} $E$. Identificando la indicación promedio observada en el pie de rey como $F(\vec{x}) \equiv L_i$ y el valor de referencia patrón como $\bk{F} \equiv L_{BP}$:
+
+\begin{equation}
+  L_i = L_{BP} + E \implies E = L_i - L_{BP}
+  \label{eq:e-base}
+\end{equation}
+
+donde $L_i$ es el valor promedio indicado por el pie de rey y $L_{BP}$ representa la longitud del bloque patrón corregida por certificado. Esta ecuación es análoga a la ecuación~\eqref{eq:error-func} de la sección anterior.
+
+\subsubsection*{Corrección por efectos térmicos}
+
+Al considerar que la calibración se realiza a una temperatura ambiente que puede diferir de la temperatura nominal de referencia ($20\,^\circ\text{C}$), tanto el pie de rey como el bloque patrón experimentan dilatación térmica lineal. Incorporando estas correcciones:
+
+\begin{equation}
+  E = L_i (1 + \alpha_i \Delta T_i) - L_{BP} (1 + \alpha_{BP} \Delta T_{BP})
+  \label{eq:e-termal}
+\end{equation}
+
+donde:
+\begin{itemize}
+\item $\alpha_i$: coeficiente de expansión térmica del pie de rey.
+\item $\alpha_{BP}$: coeficiente de expansión térmica del bloque patrón.
+\item $\Delta T_i$: desviación de temperatura del pie de rey respecto a $20\,^\circ\text{C}$.
+\item $\Delta T_{BP}$: desviación de temperatura del bloque patrón respecto a $20\,^\circ\text{C}$.
+\end{itemize}
+
+Expandiendo algebraicamente:
+
+\begin{equation}
+  E = L_i + L_i \alpha_i \Delta T_i - L_{BP} - L_{BP} \alpha_{BP} \Delta T_{BP}
+  \label{eq:e-expanded}
+\end{equation}
+
+Para facilitar el tratamiento analítico del acoplamiento térmico y de los materiales, se introducen dos diferencias auxiliares:
+
+\begin{align}
+  \delta\alpha &= \alpha_i - \alpha_{BP}
+  \label{eq:dalpha} \\
+  \delta T &= \Delta T_i - \Delta T_{BP}
+  \label{eq:dT}
+\end{align}
+
+Sustituyendo estas relaciones en la ecuación~\eqref{eq:e-expanded} y asumiendo la condición de proximidad dimensional $L_i \approx L_{BP}$ en los términos correctivos de segundo orden, se obtiene la ecuación del modelo de medición:
+
+\begin{equation}
+  E = L_i + L_i \, \delta\alpha \, \Delta T_i + L_{BP} \, \alpha_{BP} \, \delta T - L_{BP}
+  \label{eq:e-model}
+\end{equation}
+
+\subsubsection*{Relación funcional y cálculo de la incertidumbre combinada}
+
+Conforme al desarrollo en serie de Taylor de primer orden presentado en la ecuación~\eqref{eq:taylor-f-aprox}, el error de indicación queda expresado como una función multivariable diferenciable:
+
+\begin{equation}
+  E = f(L_i; L_{BP}; \delta\alpha; \Delta T_i; \alpha_{BP}; \delta T)
+  \label{eq:e-func}
+\end{equation}
+
+Aplicando la ley de propagación de errores para variables estadísticas no correlacionadas ($\text{Cov}(x_i, x_j) = 0$ para $i \neq j$) desarrollada en la ecuación~\eqref{eq:error-std-values}, la varianza combinada $\sigma_c^2(E)$ del mesurando está dada por la suma en cuadratura de las varianzas individuales ponderadas por sus coeficientes de sensibilidad:
+
+\begin{equation}
+  \sigma_c^2(E) = \sum_{j=1}^6 \left( \left. \frac{\partial f}{\partial x_j} \right|_{\vec{\mu}} \right)^2 \sigma^2(x_j)
+  \label{eq:gum}
+\end{equation}
+
+donde los coeficientes de sensibilidad $c_j$ corresponden a:
+
+\begin{equation}
+  c_j = \left. \frac{\partial f}{\partial x_j} \right|_{\vec{\mu}}
+  \label{eq:sens-coef}
+\end{equation}
+
+Desarrollando la sumatoria~\eqref{eq:gum} para las seis variables de entrada del modelo:
+
+\begin{align}
+  \sigma_c^2(E) &=
+  \left( \frac{\partial E}{\partial L_i} \right)^2 \sigma^2(L_i) +
+  \left( \frac{\partial E}{\partial L_{BP}} \right)^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + \left( \frac{\partial E}{\partial \delta\alpha} \right)^2 \sigma^2(\delta\alpha) +
+  \left( \frac{\partial E}{\partial \Delta T_i} \right)^2 \sigma^2(\Delta T_i) \label{eq:gum-expanded} \\
+  &\quad + \left( \frac{\partial E}{\partial \alpha_{BP}} \right)^2 \sigma^2(\alpha_{BP}) +
+  \left( \frac{\partial E}{\partial \delta T} \right)^2 \sigma^2(\delta T). \nonumber
+\end{align}
+
+Evaluando las derivadas parciales de la función~\eqref{eq:e-model} respecto a cada variable de entrada:
+
+\begin{align}
+  \frac{\partial E}{\partial L_i} &= 1 + \delta\alpha \, \Delta T_i, &
+  \frac{\partial E}{\partial L_{BP}} &= -1 + \alpha_{BP} \, \delta T, \nonumber \\
+  \frac{\partial E}{\partial \delta\alpha} &= L_i \, \Delta T_i, &
+  \frac{\partial E}{\partial \Delta T_i} &= L_i \, \delta\alpha, \label{eq:sens-deriv} \\
+  \frac{\partial E}{\partial \alpha_{BP}} &= L_{BP} \, \delta T, &
+  \frac{\partial E}{\partial \delta T} &= L_{BP} \, \alpha_{BP}. \nonumber
+\end{align}
+
+Sustituyendo estos coeficientes en la ecuación~\eqref{eq:gum-expanded}, se obtiene la ecuación final para la varianza combinada del error de indicación:
+
+\begin{align}
+  \sigma_c^2(E) &=
+  [1 + \delta\alpha \, \Delta T_i]^2 \sigma^2(L_i) +
+  [-1 + \alpha_{BP} \, \delta T]^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + [L_i \, \Delta T_i]^2 \sigma^2(\delta\alpha) +
+  [L_i \, \delta\alpha]^2 \sigma^2(\Delta T_i) \label{eq:sigma-final} \\
+  &\quad + [L_{BP} \, \delta T]^2 \sigma^2(\alpha_{BP}) +
+  [L_{BP} \, \alpha_{BP}]^2 \sigma^2(\delta T). \nonumber
+\end{align}
