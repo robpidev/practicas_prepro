@@ -1,0 +1,323 @@
+\subsection{PIE DE REY}
+\subsubsection*{Datos del instrumento:}
+\begin{tabular}{ll}
+Marca:      & Mitutoyo\\[3pt]
+Código:     & 530-115\\[3pt]
+Serie:      & 2013G454\\[3pt]
+Resolución: & $0{,}1\text{ mm}$
+\end{tabular}
+
+\vspace{6pt}
+Procedimiento por comparación con instrumento de referencia según norma\\ PC-012 INACAL (\textit{Procedimiento de calibración de pie de rey}).
+
+\vspace{12pt}
+\subsubsection*{Equipos e instrumentos utilizados:}
+\begin{tabular}{ll}
+Bloques patrón de longitud & \\[3pt]
+Cilindro patrón            & \\[3pt]
+Anillo patrón              & \\[3pt]
+Mesa de planitud           & \\[3pt]
+Termómetro de contacto     & Exactitud $\pm 0{,}5\ ^\circ\text{C}$
+\end{tabular}
+
+\vspace{12pt}
+\subsubsection*{Nomenclatura:}
+\begin{tabular}{ll}
+BU  & Bloques Utilizados\\[3pt]
+VP  & Valor Patrón\\[3pt]
+VPC & Valor Patrón Corregido\\[3pt]
+PC  & Promedio Corregido
+\end{tabular}
+
+\vspace{12pt}
+\subsubsection{Deducción de las ecuaciones de medición e incertidumbre}
+
+Partiendo del modelo de medición definido en la Sección~\ref{sec:propagacion}, toda magnitud experimental continua $F(\vec{x})$ se descompone en su valor medio esperado $\langle F \rangle$ y una fluctuación o error aleatorio residual $E(\vec{x})$:
+
+\begin{equation}
+  F(\vec{x}) = \bk{F} + E(\vec{x}) \implies E(\vec{x}) = F(\vec{x}) - \bk{F}
+  \label{eq:modelo-base}
+\end{equation}
+
+En el procedimiento de calibración se busca cuantificar el \textbf{error de indicación} $E$. Identificando la indicación promedio observada en el pie de rey como $F(\vec{x}) \equiv L_i$ y el valor de referencia patrón como $\bk{F} \equiv L_{BP}$:
+
+\begin{equation}
+  L_i = L_{BP} + E \implies E = L_i - L_{BP}
+  \label{eq:e-base}
+\end{equation}
+
+donde $L_i$ es el valor promedio indicado por el pie de rey y $L_{BP}$ representa la longitud del bloque patrón corregida por certificado. Esta ecuación es análoga a la ecuación~\eqref{eq:error-func} de la sección anterior.
+
+\subsubsection*{Corrección por efectos térmicos}
+
+Al considerar que la calibración se realiza a una temperatura ambiente que puede diferir de la temperatura nominal de referencia ($20\,^\circ\text{C}$), tanto el pie de rey como el bloque patrón experimentan dilatación térmica lineal. Incorporando estas correcciones:
+
+\begin{equation}
+  E = L_i (1 + \alpha_i \Delta T_i) - L_{BP} (1 + \alpha_{BP} \Delta T_{BP})
+  \label{eq:e-termal}
+\end{equation}
+
+donde:
+\begin{itemize}
+\item $\alpha_i$: coeficiente de expansión térmica del pie de rey.
+\item $\alpha_{BP}$: coeficiente de expansión térmica del bloque patrón.
+\item $\Delta T_i$: desviación de temperatura del pie de rey respecto a $20\,^\circ\text{C}$.
+\item $\Delta T_{BP}$: desviación de temperatura del bloque patrón respecto a $20\,^\circ\text{C}$.
+\end{itemize}
+
+Expandiendo algebraicamente:
+
+\begin{equation}
+  E = L_i + L_i \alpha_i \Delta T_i - L_{BP} - L_{BP} \alpha_{BP} \Delta T_{BP}
+  \label{eq:e-expanded}
+\end{equation}
+
+Para facilitar el tratamiento analítico del acoplamiento térmico y de los materiales, se introducen dos diferencias auxiliares:
+
+\begin{align}
+  \delta\alpha &= \alpha_i - \alpha_{BP}
+  \label{eq:dalpha} \\
+  \delta T &= \Delta T_i - \Delta T_{BP}
+  \label{eq:dT}
+\end{align}
+
+Sustituyendo estas relaciones en la ecuación~\eqref{eq:e-expanded} y asumiendo la condición de proximidad dimensional $L_i \approx L_{BP}$ en los términos correctivos de segundo orden, se obtiene la ecuación del modelo de medición:
+
+\begin{equation}
+  E = L_i + L_i \, \delta\alpha \, \Delta T_i + L_{BP} \, \alpha_{BP} \, \delta T - L_{BP}
+  \label{eq:e-model}
+\end{equation}
+
+\subsubsection*{Relación funcional y cálculo de la incertidumbre combinada}
+
+Conforme al desarrollo en serie de Taylor de primer orden presentado en la ecuación~\eqref{eq:taylor-f-aprox}, el error de indicación queda expresado como una función multivariable diferenciable:
+
+\begin{equation}
+  E = f(L_i; L_{BP}; \delta\alpha; \Delta T_i; \alpha_{BP}; \delta T)
+  \label{eq:e-func}
+\end{equation}
+
+Aplicando la ley de propagación de errores para variables estadísticas no correlacionadas ($\text{Cov}(x_i, x_j) = 0$ para $i \neq j$) desarrollada en la ecuación~\eqref{eq:error-std-values}, la varianza combinada $\sigma_c^2(E)$ del mesurando está dada por la suma en cuadratura de las varianzas individuales ponderadas por sus coeficientes de sensibilidad:
+
+\begin{equation}
+  \sigma_c^2(E) = \sum_{j=1}^6 \left( \left. \frac{\partial f}{\partial x_j} \right|_{\vec{\mu}} \right)^2 \sigma^2(x_j)
+  \label{eq:gum}
+\end{equation}
+
+donde los coeficientes de sensibilidad $c_j$ corresponden a:
+
+\begin{equation}
+  c_j = \left. \frac{\partial f}{\partial x_j} \right|_{\vec{\mu}}
+  \label{eq:sens-coef}
+\end{equation}
+
+Desarrollando la sumatoria~\eqref{eq:gum} para las seis variables de entrada del modelo:
+
+\begin{align}
+  \sigma_c^2(E) &=
+  \left( \frac{\partial E}{\partial L_i} \right)^2 \sigma^2(L_i) +
+  \left( \frac{\partial E}{\partial L_{BP}} \right)^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + \left( \frac{\partial E}{\partial \delta\alpha} \right)^2 \sigma^2(\delta\alpha) +
+  \left( \frac{\partial E}{\partial \Delta T_i} \right)^2 \sigma^2(\Delta T_i) \label{eq:gum-expanded} \\
+  &\quad + \left( \frac{\partial E}{\partial \alpha_{BP}} \right)^2 \sigma^2(\alpha_{BP}) +
+  \left( \frac{\partial E}{\partial \delta T} \right)^2 \sigma^2(\delta T). \nonumber
+\end{align}
+
+Evaluando las derivadas parciales de la función~\eqref{eq:e-model} respecto a cada variable de entrada:
+
+\begin{align}
+  \frac{\partial E}{\partial L_i} &= 1 + \delta\alpha \, \Delta T_i, &
+  \frac{\partial E}{\partial L_{BP}} &= -1 + \alpha_{BP} \, \delta T, \nonumber \\
+  \frac{\partial E}{\partial \delta\alpha} &= L_i \, \Delta T_i, &
+  \frac{\partial E}{\partial \Delta T_i} &= L_i \, \delta\alpha, \label{eq:sens-deriv} \\
+  \frac{\partial E}{\partial \alpha_{BP}} &= L_{BP} \, \delta T, &
+  \frac{\partial E}{\partial \delta T} &= L_{BP} \, \alpha_{BP}. \nonumber
+\end{align}
+
+Sustituyendo estos coeficientes en la ecuación~\eqref{eq:gum-expanded}, se obtiene la ecuación final para la varianza combinada del error de indicación:
+
+\begin{align}
+  \sigma_c^2(E) &=
+  [1 + \delta\alpha \, \Delta T_i]^2 \sigma^2(L_i) +
+  [-1 + \alpha_{BP} \, \delta T]^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + [L_i \, \Delta T_i]^2 \sigma^2(\delta\alpha) +
+  [L_i \, \delta\alpha]^2 \sigma^2(\Delta T_i) \label{eq:sigma-final} \\
+  &\quad + [L_{BP} \, \delta T]^2 \sigma^2(\alpha_{BP}) +
+  [L_{BP} \, \alpha_{BP}]^2 \sigma^2(\delta T). \nonumber
+\end{align}
+
+\subsubsection*{Estimación de las incertidumbres estándar de las variables de influencia}
+
+\subsubsection{Estimación de las componentes de incertidumbre del pie de rey \texorpdfstring{$\sigma(L_i)$}{\sigma(L_i)}}
+
+Para cuantificar las fuentes de variabilidad que afectan directamente la lectura del pie de rey, se evalúan las componentes geométricas, estadísticas y de resolución conforme al modelo de varianza de la ecuación~\eqref{eq:discrete-std-x-i}. Para cada componente acotada se aplica la distribución rectangular deducida en el marco teórico (ecuación~\eqref{eq:sigma-rectangular}), donde $\sigma = a/\sqrt{3}$ con $a$ la semiamplitud del intervalo.
+
+\paragraph{Error de contacto de la superficie parcial en medición de exteriores ($E$)}
+Determinado experimentalmente según el ítem 10.1.2 de la norma PC-012 a partir de la máxima diferencia absoluta entre las posiciones superior, central e inferior respecto al bloque patrón. Aplicando la ecuación~\eqref{eq:sigma-rectangular}:
+
+\begin{equation}
+    \sigma(L_{i_E}) = \frac{E}{2\sqrt{3}}
+    \label{eq:sigma-LiE}
+\end{equation}
+
+\paragraph{Error de repetibilidad de contacto de la superficie parcial ($R$)}
+Para cuantificar la dispersión aleatoria experimental (evaluación Tipo A), se seleccionan $n = 5$ mediciones repetidas en el punto de mayor error nominal. De acuerdo con las ecuaciones~\eqref{eq:std-s-eq} y~\eqref{eq:std-relative}, la desviación del promedio de $n$ observaciones independientes se reduce por el factor $1/\sqrt{n}$:
+
+\begin{equation}
+    \sigma(L_{i_R}) = \frac{s_R}{\sqrt{n}}
+    \label{eq:sigma-LiR}
+\end{equation}
+
+donde la desviación estándar experimental de la muestra $s_R$ corresponde a:
+
+\begin{equation}
+    s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^n (R_p - \bar{R})^2}
+    \label{eq:desv-estandar-muestral}
+\end{equation}
+
+siendo $R_p$ cada lectura individual y $\bar{R}$ la media aritmética muestral.
+
+\paragraph{Error por cambio de escala ($S$)}
+Representa la discrepancia al alternar entre la escala de medición de exteriores e interiores ($S_{E-I}$) o exteriores y profundidad ($S_{E-P}$). Tomando el caso más desfavorable $S = \max(S_{E-I}, S_{E-P})$ bajo el modelo de la ecuación~\eqref{eq:sigma-rectangular}:
+
+\begin{equation}
+    \sigma(L_{i_S}) = \frac{\max(S_{E-I}, S_{E-P})}{2\sqrt{3}}
+    \label{eq:sigma-LiS}
+\end{equation}
+
+\paragraph{Errores geométricos de contacto y alineamiento ($L$, $J$, $K$)}
+Siguiendo análogamente el modelo de la ecuación~\eqref{eq:sigma-rectangular}, las incertidumbres estándar por desviaciones de contacto y cruce resultan:
+
+\begin{align}
+    \sigma(L_{i_L}) &= \frac{L}{2\sqrt{3}} \label{eq:sigma-LiL} \\
+    \sigma(L_{i_J}) &= \frac{J}{2\sqrt{3}} \label{eq:sigma-LiJ} \\
+    \sigma(L_{i_K}) &= \frac{K}{2\sqrt{3}} \label{eq:sigma-LiK}
+\end{align}
+
+\paragraph{Incertidumbre por resolución del pie de rey ($r$)}
+El límite de discriminación instrumental define un intervalo de semiamplitud $\pm r/2$. Para escalas vernier se toma $r = d/m$ (con $d = 0{,}1\text{ mm}$ y $m = 2$), obteniéndose mediante la ecuación~\eqref{eq:sigma-rectangular}:
+
+\begin{equation}
+    \sigma(L_{i_r}) = \frac{r}{\sqrt{3}} = \frac{d / m}{\sqrt{3}}
+    \label{eq:sigma-Lir}
+\end{equation}
+
+\paragraph{Varianza combinada de la indicación $\sigma^2(L_i)$}
+Asumiendo independencia estadística entre los factores evaluados ($\text{Cov} = 0$, conforme a la ecuación~\eqref{eq:error-std-values}), la varianza total de la indicación del pie de rey resulta de la suma en cuadratura de las ecuaciones~\eqref{eq:sigma-LiE} a~\eqref{eq:sigma-Lir}:
+
+\begin{equation}
+    \sigma^2(L_i) = \sigma^2(L_{i_E}) + \sigma^2(L_{i_R}) + \sigma^2(L_{i_S}) + \sigma^2(L_{i_L}) + \sigma^2(L_{i_J}) + \sigma^2(L_{i_K}) + \sigma^2(L_{i_r})
+    \label{eq:sigma-Li-total}
+\end{equation}
+
+\subsubsection{Incertidumbre debida a los patrones de referencia \texorpdfstring{$\sigma(L_{BP})$}{\sigma(L_{BP})}}
+
+La longitud de referencia $L_{BP}$ incorpora dos contribuciones independientes:
+
+\paragraph{Incertidumbre de calibración y combinación de bloques}
+A partir de la incertidumbre expandida $U_{cal}$ reportada en el certificado para un factor de cobertura $k = 2$, la varianza combinada para una serie de $M$ bloques patrón acoplados es:
+
+\begin{equation}
+    \sigma^2(L_{BP_{cal}}) = \sum_{q=1}^M \left(\frac{U_{Lq,cal}}{k}\right)^2
+    \label{eq:sigma-BP-cal}
+\end{equation}
+
+\paragraph{Deriva temporal de los bloques patrón}
+Modelando la variación máxima permisible anual $U_{der}$ estipulada por la norma ISO 3650 mediante la distribución rectangular de la ecuación~\eqref{eq:sigma-rectangular}:
+
+\begin{equation}
+    \sigma^2(L_{BP_{der}}) = \sum_{q=1}^M \left(\frac{U_{Lq,der}}{\sqrt{3}}\right)^2
+    \label{eq:sigma-BP-der}
+\end{equation}
+
+\paragraph{Varianza total del bloque patrón $\sigma^2(L_{BP})$}
+Combinando ambas componentes independientes:
+
+\begin{equation}
+    \sigma^2(L_{BP}) = \sigma^2(L_{BP_{cal}}) + \sigma^2(L_{BP_{der}})
+    \label{eq:sigma-LBP-total}
+\end{equation}
+
+\subsubsection{Incertidumbres asociadas a los parámetros térmicos}
+
+Para las condiciones ambientales de ensayo ($T = 21{,}5\ ^\circ\text{C}$):
+
+\paragraph{Coeficientes de dilatación térmica $\sigma^2(\alpha_{BP})$ y $\sigma^2(\delta\alpha)$}
+Para bloques y pie de rey de acero con semiamplitudes de tolerancia $\Delta\alpha_{BP}$ y $\Delta\alpha_i$, la aplicación de la ecuación~\eqref{eq:sigma-rectangular} proporciona:
+
+\begin{align}
+    \sigma^2(\alpha_{BP}) &= \frac{\Delta\alpha_{BP}^2}{3}, \label{eq:sigma-alpha-BP} \\
+    \sigma^2(\delta\alpha) &= \frac{\Delta\alpha_{BP}^2}{3} + \frac{\Delta\alpha_i^2}{3} \label{eq:sigma-dalpha}
+\end{align}
+
+\paragraph{Desviaciones y gradientes de temperatura $\sigma^2(\Delta T_i)$ y $\sigma^2(\delta T)$}
+Considerando la calibración del termómetro de contacto ($UT_{cert}/k$), la deriva instrumental ($UT_{der}/\sqrt{3}$), la resolución ($d_T / (m_T \sqrt{3})$) y la fluctuación máxima observada respecto a $20\,^\circ\text{C}$ ($\Delta t_{A_i}/\sqrt{3}$):
+
+\begin{equation}
+    \sigma^2(\Delta T_i) = \left(\frac{UT_{cert}}{k}\right)^2 + \frac{\Delta t_{A_i}^2}{3} + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2 + \frac{UT_{der}^2}{3}
+    \label{eq:sigma-deltaTi}
+\end{equation}
+
+De manera análoga, para el gradiente térmico diferencial entre los bloques y el pie de rey ($\delta T$):
+
+\begin{equation}
+    \sigma^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2 + \frac{\Delta t^2}{3} + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2 + \frac{UT_{der}^2}{3}
+    \label{eq:sigma-deltaT}
+\end{equation}
+
+donde $\Delta t = \max(\Delta t_1, \Delta t_2)$ representa la máxima diferencia térmica entre ambos cuerpos.
+
+\subsubsection{Incertidumbre estándar combinada y expandida final}
+
+Sustituyendo las componentes~\eqref{eq:sigma-Li-total}, \eqref{eq:sigma-LBP-total}, \eqref{eq:sigma-dalpha}, \eqref{eq:sigma-deltaTi} y \eqref{eq:sigma-deltaT} en la ley de propagación de varianzas de la ecuación~\eqref{eq:sigma-final}, la varianza combinada del error de indicación queda expresada en forma completamente desarrollada como:
+
+\begin{align}
+    \sigma_c^2(E) &=
+    [1 + \delta\alpha \, \Delta T_i]^2
+    \Bigg[
+        \left(\frac{E}{2\sqrt{3}}\right)^2
+        + \frac{s_R^2}{n}
+        + \left(\frac{\max(S_{E-I}, S_{E-P})}{2\sqrt{3}}\right)^2 \nonumber \\
+    &\qquad\qquad
+        + \left(\frac{L}{2\sqrt{3}}\right)^2
+        + \left(\frac{J}{2\sqrt{3}}\right)^2
+        + \left(\frac{K}{2\sqrt{3}}\right)^2
+        + \left(\frac{d/m}{\sqrt{3}}\right)^2
+    \Bigg] \nonumber \\[4pt]
+    &\quad + [-1 + \alpha_{BP} \, \delta T]^2
+    \Bigg[
+        \sum_{q=1}^M \left(\frac{U_{Lq,cal}}{k}\right)^2
+        + \sum_{q=1}^M \left(\frac{U_{Lq,der}}{\sqrt{3}}\right)^2
+    \Bigg] \nonumber \\[4pt]
+    &\quad + [L_i \, \Delta T_i]^2
+    \Bigg[
+        \frac{\Delta\alpha_{BP}^2}{3} + \frac{\Delta\alpha_i^2}{3}
+    \Bigg] \nonumber \\[4pt]
+    &\quad + [L_i \, \delta\alpha]^2
+    \Bigg[
+        \left(\frac{UT_{cert}}{k}\right)^2
+        + \frac{\Delta t_{A_i}^2}{3}
+        + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2
+        + \frac{UT_{der}^2}{3}
+    \Bigg] \nonumber \\[4pt]
+    &\quad + [L_{BP} \, \delta T]^2
+    \Bigg[
+        \frac{\Delta\alpha_{BP}^2}{3}
+    \Bigg] \nonumber \\[4pt]
+    &\quad + [L_{BP} \, \alpha_{BP}]^2
+    \Bigg[
+        \left(\frac{UT_{cert}}{k}\right)^2
+        + \frac{\Delta t^2}{3}
+        + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2
+        + \frac{UT_{der}^2}{3}
+    \Bigg] \label{eq:sigma-cuad-expandida}
+\end{align}
+
+Finalmente, la incertidumbre expandida $U(E)$ para el error de indicación del pie de rey se reporta mediante:
+
+\begin{equation}
+    U(E) = k \cdot \sigma_c(E) = k \sqrt{\sigma_c^2(E)}
+    \label{eq:incertidumbre-expandida}
+\end{equation}
+
+adoptando un factor de cobertura $k = 2$, correspondiente a un nivel de confianza bilateral aproximado del 95\,\%.

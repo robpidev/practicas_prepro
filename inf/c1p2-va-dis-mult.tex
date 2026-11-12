@@ -186,3 +186,76 @@ cuadrada del número de variables.
   = \frac{\sigma}{\sqrt{N}\bk{F}}
   \label{eq:std-relative}
 \end{equation}
+
+\subsubsection{Varianza de una muestra y el factor \texorpdfstring{$1/(n-1)$}{1/(n-1)}}
+
+En las secciones previas se definió el valor medio teorico como $\mu
+= \langle x \rangle$. Pero en un experimento solo tenemos $n$
+mediciones independientes $\{x_1, \dots, x_n\}$, asi que usamos el promedio:
+
+\begin{equation}
+  \bk{x}_n = \frac{1}{n} \sum_{i=1}^n x_i
+  \label{eq:media-muestral}
+\end{equation}
+
+Si usamos el promedio $\bk{x}_n$ en vez del valor medio $\mu$, estamos
+subestimando la dispersion. Para ver esto escribimos la desviacion de
+cada medicion sumando y restando $\mu$:
+
+\begin{equation}
+  x_i - \bk{x}_n = (x_i - \mu) - (\bk{x}_n - \mu)
+\end{equation}
+
+Elevando al cuadrado y sumando sobre las $n$ mediciones:
+
+\begin{align}
+  \sum_{i=1}^n (x_i - \bk{x}_n)^2 &= \sum_{i=1}^n \left[ (x_i - \mu) -
+  (\bk{x}_n - \mu) \right]^2 \nonumber \\
+  &= \sum_{i=1}^n (x_i - \mu)^2 - 2(\bk{x}_n - \mu) \sum_{i=1}^n (x_i
+  - \mu) + \sum_{i=1}^n (\bk{x}_n - \mu)^2
+\end{align}
+
+Puesto que $\sum_{i=1}^n (x_i - \mu) = n(\bk{x}_n - \mu)$, la suma se reduce a:
+
+\begin{equation}
+  \sum_{i=1}^n (x_i - \bk{x}_n)^2 = \sum_{i=1}^n (x_i - \mu)^2 -
+  n(\bk{x}_n - \mu)^2
+  \label{eq:descomposicion-residuos}
+\end{equation}
+
+Ahora aplicamos el valor esperado $\langle \cdots \rangle$:
+
+\begin{equation}
+  \left\langle \sum_{i=1}^n (x_i - \bk{x}_n)^2 \right\rangle =
+  \sum_{i=1}^n \langle (x_i - \mu)^2 \rangle - n \langle (\bk{x}_n -
+  \mu)^2 \rangle
+  \label{eq:esperanza-residuos}
+\end{equation}
+
+Recordando que por definicion de varianza (ecuación~\eqref{eq:d-var})
+$\langle (x_i - \mu)^2 \rangle = \sigma^2$, y que la varianza del
+promedio (ecuación~\eqref{eq:std-relative}) cumple $\langle (\bk{x}_n
+- \mu)^2 \rangle = \sigma^2 / n$, entonces:
+
+\begin{align}
+  \left\langle \sum_{i=1}^n (x_i - \bk{x}_n)^2 \right\rangle &=
+  n\sigma^2 - n\left(\frac{\sigma^2}{n}\right) \nonumber \\
+  &= (n - 1)\sigma^2
+  \label{eq:esperanza-bessel}
+\end{align}
+
+Por lo tanto, para que nuestra estimacion coincida con la varianza
+$\sigma^2$ (o sea $\langle s^2 \rangle = \sigma^2$), tenemos que
+dividir entre $n - 1$:
+
+\begin{equation}
+  s^2 = \frac{1}{n - 1} \sum_{i=1}^n (x_i - \bk{x}_n)^2
+  \label{eq:varianza-muestral-insesgada}
+\end{equation}
+
+Con lo cual la desviacion estandar del promedio queda:
+
+\begin{equation}
+  \sigma(\bk{x}_n) = \frac{s}{\sqrt{n}}
+  \label{eq:sigma-media-experimental}
+\end{equation}

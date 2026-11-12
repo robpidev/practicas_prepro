@@ -48,6 +48,53 @@ Y la desviación estandar de $F$ será
   \label{eq:std-con-mult}
 \end{equation}
 
+\subsubsection{Distribución continua uniforme (rectangular)}
+
+Supongamos una variable aleatoria continua $x$ acotada dentro de un intervalo simétrico $[-a, a]$ de amplitud total $\Delta = 2a$. En ausencia de información adicional que privilegie algún punto del intervalo, asignamos una densidad de probabilidad uniforme constante $P(x) = C$.
+
+Por la condición de normalización de la ecuación~\eqref{eq:prob-aleatoria-continua}:
+
+\begin{equation}
+    \int_{-a}^{a} P(x) \, dx = C \int_{-a}^{a} dx = C(2a) = 1
+    \quad\Longrightarrow\quad
+    C = \frac{1}{2a}
+\end{equation}
+
+por lo que la función de densidad queda:
+
+\begin{equation}
+    P(x) =
+    \begin{cases}
+        \dfrac{1}{2a}, & x \in [-a, a] \\[6pt]
+        0, & x \notin [-a, a]
+    \end{cases}
+    \label{eq:distribucion-rectangular}
+\end{equation}
+
+Puesto que $P(x)$ es una función par respecto al origen, el valor medio es nulo:
+
+\begin{equation}
+    \langle x \rangle = \int_{-a}^{a} x P(x) \, dx = \frac{1}{2a} \int_{-a}^{a} x \, dx = 0
+\end{equation}
+
+Evaluando la varianza mediante el segundo momento central de la ecuación~\eqref{eq:std-con-mult}:
+
+\begin{equation}
+    \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
+    = \int_{-a}^{a} x^2 P(x) \, dx
+    = \frac{1}{2a} \left[ \frac{x^3}{3} \right]_{-a}^{a}
+    = \frac{a^2}{3}
+\end{equation}
+
+Extrayendo la raíz cuadrada, la desviación estándar de la distribución rectangular resulta:
+
+\begin{equation}
+    \sigma = \frac{a}{\sqrt{3}} = \frac{\Delta}{2\sqrt{3}}
+    \label{eq:sigma-rectangular}
+\end{equation}
+
+donde $a$ es la semiamplitud del intervalo y $\Delta = 2a$ su ancho total.
+
 De manera análoga a la función delta de Kroneker se define
 la función delta $\delta_\epsilon(x)$ como sigue
 
