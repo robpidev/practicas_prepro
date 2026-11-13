@@ -4,60 +4,81 @@
 % GUM en la Tabla 6, el generador está en la celda del notebook que exporta
 % t6.tex, en las líneas marcadas [GUM].
 
-\paragraph{Estimación de las componentes de incertidumbre del pie de rey \texorpdfstring{$\sigma(L_i)$}{sigma(Li)}}
-Para cuantificar las fuentes de variabilidad que afectan directamente la lectura del pie de rey, se evalúan las componentes geométricas, estadísticas y de resolución conforme al modelo de varianza de la ecuación~\eqref{eq:discrete-std-x-i}. Para cada componente acotada se aplica la distribución rectangular deducida en el marco teórico (ecuación~\eqref{eq:sigma-rectangular}), donde $\sigma = a/\sqrt{3}$ con $a$ la semiamplitud del intervalo.
+\subsubsection{Componentes de incertidumbre de la indicación}
 
-La componente asociada al error de contacto de la superficie parcial, $\sigma(L_{i_E})$, se dedujo en la Sección~\ref{sec:pie-rey-reduccion} (ecuación~\eqref{eq:sigma-LiE}). A continuación se estiman las restantes.
-
-\paragraph{Error de repetibilidad de contacto de la superficie parcial ($R$)}
-Para cuantificar la dispersión aleatoria experimental (evaluación Tipo A), se seleccionan $n = 5$ mediciones repetidas en el punto de mayor error nominal. De acuerdo con las ecuaciones~\eqref{eq:std-s-eq} y~\eqref{eq:std-relative}, la desviación del promedio de $n$ observaciones independientes se reduce por el factor $1/\sqrt{n}$:
+Sea $L_i$ la indicación del pie de rey. Conforme a la
+ecuación~\eqref{eq:discrete-std-x-i}, su varianza es
+$\sigma^2(L_i) = \bk{(L_i - \bk{L_i})^2}$, suma en cuadratura de las componentes
+independientes que la afectan. Para cada componente acotada en un intervalo de
+semiamplitud $a$ se aplica la distribución rectangular deducida en el marco
+teórico, ecuación~\eqref{eq:sigma-rectangular}, de modo que
 
 \begin{equation}
-    \sigma(L_{i_R}) = \frac{s_R}{\sqrt{n}}
-    \label{eq:sigma-LiR}
+    \sigma^2 = \int_\Omega (x - \bk{x})^2 P(x)\,dx = \frac{a^2}{3}
+    \quad\Longrightarrow\quad
+    \sigma = \frac{a}{\sqrt{3}} .
+    \label{eq:componente-general}
 \end{equation}
 
-donde la desviación estándar experimental de la muestra $s_R$ corresponde a:
+La componente asociada al error de contacto de la superficie parcial,
+$\sigma(L_{i_E})$, se dedujo en la ecuación~\eqref{eq:sigma-LiE}. A continuación se
+estiman las restantes aplicando \eqref{eq:componente-general}.
+
+\subsubsection*{Error de repetibilidad de contacto de la superficie parcial}
+
+Sea $R_p$ cada una de las $n$ lecturas repetidas y $\bar{R}$ su media aritmética
+muestral. La dispersión experimental (evaluación tipo~A) se estima con la desviación
+estándar muestral
 
 \begin{equation}
-    s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^n (R_p - \bar{R})^2}
+    s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^n (R_p - \bar{R})^2},
     \label{eq:desv-estandar-muestral}
 \end{equation}
 
-siendo $R_p$ cada lectura individual y $\bar{R}$ la media aritmética muestral.
+y, según la ecuación~\eqref{eq:std-relative}, la desviación del promedio de $n$
+observaciones independientes se reduce por el factor $1/\sqrt{n}$:
 
-Las cinco repeticiones se efectuaron en el punto de $250$ mm, seleccionado por ser
+\begin{equation}
+    \sigma(L_{i_R}) = \frac{s_R}{\sqrt{n}} .
+    \label{eq:sigma-LiR}
+\end{equation}
+
+Las $n = 5$ repeticiones se efectúan en el punto de $250$ mm, seleccionado por ser
 el de mayor lectura de la serie (ante el empate en $E$ entre $100$ mm y $200$ mm se
-optó por el extremo del alcance, donde el error de repetibilidad suele ser mayor):
+opta por el extremo del alcance, donde el error de repetibilidad suele ser mayor):
 
 \input{c3-calibration/pie-de-rey/tablas/t4.tex}
 
-El rango de las cinco lecturas, $R = \max R_p - \min R_p = 50\ \mu\text{m}$, y la
-desviación estándar experimental $s_R = 27.39\ \mu\text{m}$ conducen a
+El rango de las cinco lecturas es $R = \max R_p - \min R_p = 50\ \mu\text{m}$ y la
+desviación estándar experimental $s_R = 27.39\ \mu\text{m}$, de modo que
 
 \begin{equation}
-    \therefore\ \sigma(L_{i_R}) = \frac{27.39}{\sqrt{5}}\ \mu\text{m}
-    \approx 12.25\ \mu\text{m}
+    \therefore\quad \sigma(L_{i_R}) = \frac{27.39}{\sqrt{5}}\ \mu\text{m}
+    \approx 12.25\ \mu\text{m}.
     \label{eq:sigma-LiR-valor}
 \end{equation}
 
-Conviene notar que las cinco repeticiones fueron tomadas en una tanda distinta de
-las mediciones de la Tabla~\ref{tab:pie-rey-datos}, donde las tres lecturas de
-$250$ mm fueron $250.00$ mm. La diferencia de $0.08$ mm entre la media de las
-repeticiones ($\bar{R} = 250.08$ mm) y aquella lectura refleja una deriva
-instrumental entre ambas series, no dispersión aleatoria, y por ello no se suma a
-$\sigma(L_i)$: la repetibilidad cuantifica únicamente la dispersión interna de la
-tanda repetida, tal como define la ecuación~\eqref{eq:sigma-LiR}.
+Las cinco repeticiones se tomaron en una tanda distinta de las mediciones de la
+Tabla~\ref{tab:pie-rey-datos}, donde las tres lecturas de $250$ mm fueron
+$250.00$ mm. La diferencia de $0.08$ mm entre la media de las repeticiones
+($\bar{R} = 250.08$ mm) y aquella lectura corresponde a una deriva instrumental
+entre ambas series, no a dispersión aleatoria, y por ello no se suma a
+$\sigma(L_i)$: la ecuación~\eqref{eq:sigma-LiR} cuantifica únicamente la dispersión
+interna de la tanda repetida.
 
-\paragraph{Error por cambio de escala ($S$)}
-Representa la discrepancia al alternar entre la escala de medición de exteriores e interiores ($S_{E-I}$) o exteriores y profundidad ($S_{E-P}$). Tomando el caso más desfavorable $S = \max(S_{E-I}, S_{E-P})$ bajo el modelo de la ecuación~\eqref{eq:sigma-rectangular}:
+\subsubsection*{Error por cambio de escala}
+
+Sea $S_{E-I}$ la discrepancia al alternar entre la escala de exteriores e interiores,
+y $S_{E-P}$ la correspondiente entre exteriores y profundidad. Tomando el caso más
+desfavorable $S = \max(S_{E-I}, S_{E-P})$ y aplicando
+\eqref{eq:componente-general} con $a = S/2$,
 
 \begin{equation}
-    \sigma(L_{i_S}) = \frac{\max(S_{E-I}, S_{E-P})}{2\sqrt{3}}
+    \sigma(L_{i_S}) = \frac{\max(S_{E-I}, S_{E-P})}{2\sqrt{3}} .
     \label{eq:sigma-LiS}
 \end{equation}
 
-El ensayo se realizó sobre un cilindro patrón de $10$ mm, midiéndolo en tres
+El ensayo se efectúa sobre un cilindro patrón de $10$ mm, midiéndolo en tres
 posiciones sobre la generatriz (superior, central e inferior) con cada una de las
 tres aplicaciones del instrumento: exteriores, interiores y profundidad. La
 Tabla~\ref{tab:pie-rey-cilindro} recoge las lecturas y los errores de indicación
@@ -65,91 +86,115 @@ correspondientes.
 
 \input{c3-calibration/pie-de-rey/tablas/t5.tex}
 
-Promediando las diferencias respecto de la medición de exteriores se obtiene
-$S_{E-I} = 16.7\ \mu\text{m}$ y $S_{E-P} = 33.3\ \mu\text{m}$. El caso más
-desfavorable es la medición de profundidad:
+Sea $D_{jk}$ el error de indicación en la aplicación $j$ y la posición $k$; el
+promedio de las diferencias respecto de la medición de exteriores proporciona
 
 \begin{equation}
-    \therefore\ \sigma(L_{i_S}) =
-    \frac{33.3}{2\sqrt{3}}\ \mu\text{m} \approx 9.62\ \mu\text{m}
+    S_{E-I} = \frac{1}{3}\sum_{k=1}^3 \left(D_{2k} - D_{1k}\right)
+    = 16.7\ \mu\text{m},
+    \qquad
+    S_{E-P} = \frac{1}{3}\sum_{k=1}^3 \left(D_{3k} - D_{1k}\right)
+    = 33.3\ \mu\text{m}.
+    \label{eq:S-valor}
+\end{equation}
+
+El caso más desfavorable es la medición de profundidad, por lo que sustituyendo en
+\eqref{eq:sigma-LiS}
+
+\begin{equation}
+    \therefore\quad \sigma(L_{i_S}) =
+    \frac{33.3}{2\sqrt{3}}\ \mu\text{m} \approx 9.62\ \mu\text{m}.
     \label{eq:sigma-LiS-valor}
 \end{equation}
 
-\paragraph{Errores geométricos de contacto y alineamiento ($L$, $J$, $K$)}
-Siguiendo análogamente el modelo de la ecuación~\eqref{eq:sigma-rectangular}, las incertidumbres estándar por desviaciones de contacto y cruce resultan:
+\subsubsection*{Errores geométricos de contacto y alineamiento}
+
+Sean $L$, $J$ y $K$ las desviaciones máximas de contacto lineal, de superficie
+completa y de cruce de las superficies de medición de interiores, respectivamente.
+Aplicando \eqref{eq:componente-general} a cada una con semiamplitud $a = X/2$:
 
 \begin{align}
-    \sigma(L_{i_L}) &= \frac{L}{2\sqrt{3}} \label{eq:sigma-LiL} \\
-    \sigma(L_{i_J}) &= \frac{J}{2\sqrt{3}} \label{eq:sigma-LiJ} \\
-    \sigma(L_{i_K}) &= \frac{K}{2\sqrt{3}} \label{eq:sigma-LiK}
+    \sigma(L_{i_L}) &= \frac{L}{2\sqrt{3}}, \label{eq:sigma-LiL} \\
+    \sigma(L_{i_J}) &= \frac{J}{2\sqrt{3}}, \label{eq:sigma-LiJ} \\
+    \sigma(L_{i_K}) &= \frac{K}{2\sqrt{3}}. \label{eq:sigma-LiK}
 \end{align}
 
 La medición del cilindro sobre la superficie de contacto lineal (aristas de las
-mordazas sobre una generatriz) arrojó $L = 10\ \mu\text{m}$; sobre superficie
-completa (bloques), $J = 0$; y en el cruce de las superficies de medición de
-interiores, $K = 0$. Por tanto
+mordazas sobre una generatriz) arroja $L = 10\ \mu\text{m}$; sobre superficie completa
+(bloques), $J = 0$; y en el cruce de las superficies de medición de interiores,
+$K = 0$. Por tanto
 
 \begin{equation}
+    \therefore\quad
     \sigma(L_{i_L}) = \frac{10}{2\sqrt{3}}\ \mu\text{m} \approx 2.89\ \mu\text{m},
-    \qquad \sigma(L_{i_J}) = \sigma(L_{i_K}) = 0
+    \qquad \sigma(L_{i_J}) = \sigma(L_{i_K}) = 0 .
     \label{eq:sigma-LiLJK-valor}
 \end{equation}
 
-\paragraph{Incertidumbre por resolución del pie de rey ($r$)}
-El límite de discriminación instrumental define un intervalo de semiamplitud $\pm r/2$. Para escalas vernier se toma $r = d/m$ (con $d = 0.05\text{ mm}$, la división de escala del 530-115, y $m = 2$), obteniéndose mediante la ecuación~\eqref{eq:sigma-rectangular}:
+\subsubsection*{Incertidumbre por resolución del pie de rey}
+
+El límite de discriminación instrumental define un intervalo de semiamplitud $a = r/2$.
+Para escalas vernier se toma $r = d/m$, con $d = 0.05$ mm la división de escala
+deducida en \eqref{eq:resolucion-vernier} y $m = 2$. Aplicando
+\eqref{eq:componente-general},
 
 \begin{equation}
-    \sigma(L_{i_r}) = \frac{r}{\sqrt{3}} = \frac{d / m}{\sqrt{3}}
+    \sigma(L_{i_r}) = \frac{r}{\sqrt{3}} = \frac{d / m}{\sqrt{3}} ,
     \label{eq:sigma-Lir}
 \end{equation}
 
-Sustituyendo los valores del instrumento:
+de modo que, sustituyendo los valores del instrumento,
 
 \begin{equation}
-    \therefore\ \sigma(L_{i_r}) =
-    \frac{0.05/2}{\sqrt{3}}\ \text{mm} \approx 14.43\ \mu\text{m}
+    \therefore\quad \sigma(L_{i_r}) =
+    \frac{0.05/2}{\sqrt{3}}\ \text{mm} \approx 14.43\ \mu\text{m}.
     \label{eq:sigma-Lir-valor}
 \end{equation}
 
-\paragraph{Varianza combinada de la indicación $\sigma^2(L_i)$}
-Asumiendo independencia estadística entre los factores evaluados ($\text{Cov} = 0$, conforme a la ecuación~\eqref{eq:error-std-values}), la varianza total de la indicación del pie de rey resulta de la suma en cuadratura de las ecuaciones~\eqref{eq:sigma-LiE} a~\eqref{eq:sigma-Lir}:
+\subsubsection*{Varianza combinada de la indicación}
+
+Asumiendo independencia estadística entre las componentes evaluadas
+($\text{Cov} = 0$, conforme a la ecuación~\eqref{eq:error-std-values}), la varianza
+total de la indicación resulta de la suma en cuadratura de las
+ecuaciones~\eqref{eq:sigma-LiE} a~\eqref{eq:sigma-Lir-valor}:
 
 \begin{equation}
-    \sigma^2(L_i) = \sigma^2(L_{i_E}) + \sigma^2(L_{i_R}) + \sigma^2(L_{i_S}) + \sigma^2(L_{i_L}) + \sigma^2(L_{i_J}) + \sigma^2(L_{i_K}) + \sigma^2(L_{i_r})
+    \sigma^2(L_i) = \sigma^2(L_{i_E}) + \sigma^2(L_{i_R}) + \sigma^2(L_{i_S})
+    + \sigma^2(L_{i_L}) + \sigma^2(L_{i_J}) + \sigma^2(L_{i_K}) + \sigma^2(L_{i_r}).
     \label{eq:sigma-Li-total}
 \end{equation}
 
 \subsubsection{Incertidumbre debida a los patrones de referencia \texorpdfstring{$\sigma(L_{BP})$}{sigma(LBP)}}
 
-La longitud de referencia $L_{BP}$ incorpora dos contribuciones independientes:
-
-\paragraph{Incertidumbre de calibración y combinación de bloques}
-A partir de la incertidumbre expandida $U_{cal}$ reportada en el certificado para un factor de cobertura $k = 2$, la varianza combinada para una serie de $M$ bloques patrón acoplados es:
+La longitud de referencia $L_{BP}$ incorpora dos contribuciones independientes. Sea
+$U_{Lq,cal}$ la incertidumbre expandida que el certificado reporta para el bloque $q$
+con factor de cobertura $k = 2$; por definición de incertidumbre expandida, la
+varianza combinada de una pila de $M$ bloques acoplados es
 
 \begin{equation}
-    \sigma^2(L_{BP_{cal}}) = \sum_{q=1}^M \left(\frac{U_{Lq,cal}}{k}\right)^2
+    \sigma^2(L_{BP_{cal}}) = \sum_{q=1}^M \left(\frac{U_{Lq,cal}}{k}\right)^2 .
     \label{eq:sigma-BP-cal}
 \end{equation}
 
-\paragraph{Deriva temporal de los bloques patrón}
-Modelando la variación máxima permisible anual $U_{der}$ estipulada por la norma ISO 3650 mediante la distribución rectangular de la ecuación~\eqref{eq:sigma-rectangular}:
+Sea $U_{Lq,der}$ la variación máxima permisible anual estipulada por la norma ISO
+3650 para el bloque $q$. Modelándola mediante la distribución rectangular de la
+ecuación~\eqref{eq:sigma-rectangular},
 
 \begin{equation}
-    \sigma^2(L_{BP_{der}}) = \sum_{q=1}^M \left(\frac{U_{Lq,der}}{\sqrt{3}}\right)^2
+    \sigma^2(L_{BP_{der}}) = \sum_{q=1}^M \left(\frac{U_{Lq,der}}{\sqrt{3}}\right)^2 .
     \label{eq:sigma-BP-der}
 \end{equation}
 
-\paragraph{Varianza total del bloque patrón $\sigma^2(L_{BP})$}
-Combinando ambas componentes independientes:
+Combinando ambas componentes independientes,
 
 \begin{equation}
-    \sigma^2(L_{BP}) = \sigma^2(L_{BP_{cal}}) + \sigma^2(L_{BP_{der}})
+    \sigma^2(L_{BP}) = \sigma^2(L_{BP_{cal}}) + \sigma^2(L_{BP_{der}}) .
     \label{eq:sigma-LBP-total}
 \end{equation}
 
 El certificado de los bloques patrón no reporta una incertidumbre individual por
-pieza, sino la expresión funcional con que el laboratorio la declara en función de
-la longitud nominal $l$:
+pieza, sino la expresión funcional con que el laboratorio la declara en función de la
+longitud nominal $l$:
 
 \begin{equation}
     U_{cal}(l) = 2\sqrt{a^2 + b^2 l^2},
@@ -159,9 +204,9 @@ la longitud nominal $l$:
 
 con factor de cobertura $k = 2$. La deriva se estima con la variación máxima
 permisible anual de la norma ISO~3650 para bloques de grado~1,
-$U_{der}(l) = \pm(0.05\ \mu\text{m} + 0.5\times10^{-6}l)$. Evaluando ambas
-expresiones sobre los cuatro bloques de la pila de $250$ mm ($25$, $50$, $75$ y
-$100$ mm) resulta
+$U_{der}(l) = \pm(0.05\ \mu\text{m} + 0.5\times10^{-6}l)$. Evaluando ambas expresiones
+sobre los cuatro bloques de la pila de $250$ mm ($25$, $50$, $75$ y $100$ mm)
+resulta
 
 \begin{equation}
     \sigma(L_{BP_{cal}}) = 0.1120\ \mu\text{m},
@@ -169,106 +214,138 @@ $100$ mm) resulta
     \label{eq:sigma-BP-valor}
 \end{equation}
 
+y sustituyendo en \eqref{eq:sigma-LBP-total}
+
 \begin{equation}
-    \therefore\ \sigma(L_{BP}) = \sqrt{0.1120^2 + 0.0578^2}\ \mu\text{m}
-    \approx 0.126\ \mu\text{m}
+    \therefore\quad \sigma(L_{BP}) = \sqrt{0.1120^2 + 0.0578^2}\ \mu\text{m}
+    \approx 0.126\ \mu\text{m}.
     \label{eq:sigma-LBP-total-valor}
 \end{equation}
 
 \subsubsection{Incertidumbres asociadas a los parámetros térmicos}
 
-Para las condiciones ambientales de ensayo, la temperatura registrada con el
-termómetro de contacto fue de $21.5\ ^\circ\text{C}$ en los cinco puntos de
-calibración (Tabla~\ref{tab:pie-rey-datos}), sin variación apreciable entre ellos. De
-ahí resulta una desviación respecto de la temperatura de referencia de
-$\Delta T_i = 21.5 - 20 = 1.5\ ^\circ\text{C}$, y una diferencia nula entre el bloque
-patrón y el pie de rey, $\delta T = 0$, ya que ambos permanecieron en el mismo
-ambiente durante la medición.
+Sea $T_0 = 20\ ^\circ\text{C}$ la temperatura de referencia y $T = 21.5\ ^\circ\text{C}$
+la registrada en los cinco puntos de calibración
+(Tabla~\ref{tab:pie-rey-datos}), sin variación apreciable entre ellos. De ahí
+resultan la desviación respecto de la temperatura de referencia,
+$\Delta T_i = T - T_0 = 1.5\ ^\circ\text{C}$, y una diferencia nula entre bloque
+patrón y pie de rey, $\delta T = 0$, ya que ambos permanecen en el mismo ambiente
+durante la medición.
 
-\paragraph{Coeficientes de dilatación térmica $\sigma^2(\alpha_{BP})$ y $\sigma^2(\delta\alpha)$}
-Para bloques y pie de rey de acero con semiamplitudes de tolerancia $\Delta\alpha_{BP}$ y $\Delta\alpha_i$, la aplicación de la ecuación~\eqref{eq:sigma-rectangular} proporciona:
+Sean $\Delta\alpha_{BP}$ y $\Delta\alpha_i$ las semiamplitudes de tolerancia de los
+coeficientes de dilatación del bloque y del pie de rey. Aplicando
+\eqref{eq:componente-general} a cada uno, y a la diferencia definida en
+\eqref{eq:dalpha},
 
 \begin{align}
-    \sigma^2(\alpha_{BP}) &= \frac{\Delta\alpha_{BP}^2}{3}, \label{eq:sigma-alpha-BP} \\
-    \sigma^2(\delta\alpha) &= \frac{\Delta\alpha_{BP}^2}{3} + \frac{\Delta\alpha_i^2}{3} \label{eq:sigma-dalpha}
+    \sigma^2(\alpha_{BP}) &= \frac{\Delta\alpha_{BP}^2}{3},
+    \label{eq:sigma-alpha-BP} \\
+    \sigma^2(\delta\alpha) &= \sigma^2(\alpha_i) + \sigma^2(\alpha_{BP})
+    = \frac{\Delta\alpha_{BP}^2}{3} + \frac{\Delta\alpha_i^2}{3}.
+    \label{eq:sigma-dalpha}
 \end{align}
 
-El acero presenta $\alpha = 11.5\times10^{-6}\ ^\circ\text{C}^{-1}$ con una dispersión
-de $\Delta\alpha = 1\times10^{-6}\ ^\circ\text{C}^{-1}$, igual para el bloque y para el
-pie de rey por ser ambos del mismo material. Sustituyendo en las
-ecuaciones~\eqref{eq:sigma-alpha-BP} y~\eqref{eq:sigma-dalpha}:
+El acero presenta $\alpha = 11.5\times10^{-6}\ ^\circ\text{C}^{-1}$ con una
+semiamplitud $\Delta\alpha = 1\times10^{-6}\ ^\circ\text{C}^{-1}$, igual para el
+bloque y para el pie de rey por ser ambos del mismo material. Sustituyendo en
+\eqref{eq:sigma-alpha-BP} y \eqref{eq:sigma-dalpha}:
 
-\begin{equation}
-    \sigma(\alpha_{BP}) = \frac{1\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
-    \approx 5.77\times10^{-7}\ ^\circ\text{C}^{-1}
-    \label{eq:sigma-alpha-BP-valor}
-\end{equation}
-
-\begin{equation}
-    \sigma(\delta\alpha) = \frac{\sqrt{2}\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
-    \approx 8.16\times10^{-7}\ ^\circ\text{C}^{-1}
+\begin{align}
+    \sigma(\alpha_{BP}) &= \frac{1\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
+    \approx 5.77\times10^{-7}\ ^\circ\text{C}^{-1},
+    \label{eq:sigma-alpha-BP-valor} \\
+    \sigma(\delta\alpha) &= \frac{\sqrt{2}\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
+    \approx 8.16\times10^{-7}\ ^\circ\text{C}^{-1}.
     \label{eq:sigma-dalpha-valor}
-\end{equation}
+\end{align}
 
-\paragraph{Desviaciones y gradientes de temperatura $\sigma^2(\Delta T_i)$ y $\sigma^2(\delta T)$}
-Para la desviación respecto de la temperatura de referencia intervienen la
-incertidumbre del certificado del termómetro ($UT_{cert}/k$), la deriva instrumental
-($UT_{der}/\sqrt{3}$), su resolución ($d_T / (m_T \sqrt{3})$) y la fluctuación
-observada durante el ensayo ($\Delta t_{A_i}/\sqrt{3}$):
+Sea ahora $\Delta T_i$ la desviación respecto de $T_0$ y sean $UT_{cert}$, $UT_{der}$
+y $d_T/m_T$ la exactitud, la deriva y la semiamplitud de discriminación del
+termómetro. Combinando las tres contribuciones independientes con
+\eqref{eq:componente-general},
 
-\begin{equation}
-    \sigma^2(\Delta T_i) = \left(\frac{UT_{cert}}{k}\right)^2 + \frac{\Delta t_{A_i}^2}{3} + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2 + \frac{UT_{der}^2}{3}
+\begin{align}
+    \sigma^2(\Delta T_i) &= \left(\frac{UT_{cert}}{k}\right)^2
+    + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2
+    + \frac{UT_{der}^2}{3}
+    + \frac{\Delta t_{A_i}^2}{3},
     \label{eq:sigma-deltaTi}
-\end{equation}
+\end{align}
 
-El termómetro de contacto del laboratorio tiene una exactitud de
-$\pm 0.5\ ^\circ\text{C}$, una deriva de $0.5\ ^\circ\text{C}$ y una división de
-escala $d_T = 0.2\ ^\circ\text{C}$ subdividida en $m_T = 5$ partes. Como la
-temperatura registrada fue la misma en los cinco puntos, la fluctuación observada es
-nula ($\Delta t_{A_i} = 0$). Sustituyendo en la ecuación~\eqref{eq:sigma-deltaTi}:
+donde $\Delta t_{A_i}$ es la fluctuación observada durante el ensayo. El termómetro de
+contacto del laboratorio tiene una exactitud de $\pm 0.5\ ^\circ\text{C}$, una deriva
+de $0.5\ ^\circ\text{C}$ y una división de escala $d_T = 0.2\ ^\circ\text{C}$
+subdividida en $m_T = 5$ partes. Como la temperatura registrada es la misma en los
+cinco puntos, la fluctuación observada es nula ($\Delta t_{A_i} = 0$) y
 
 \begin{equation}
-    \sigma(\Delta T_i) = \sqrt{\left(\frac{0.5}{2}\right)^2 + 0
+    \therefore\quad \sigma(\Delta T_i) = \sqrt{\left(\frac{0.5}{2}\right)^2 + 0
     + \left(\frac{0.2/5}{\sqrt{3}}\right)^2 + \frac{0.5^2}{3}}\ ^\circ\text{C}
-    \approx 0.383\ ^\circ\text{C}
+    \approx 0.383\ ^\circ\text{C}.
     \label{eq:sigma-deltaTi-valor}
 \end{equation}
 
-De manera análoga, para el gradiente térmico diferencial entre los bloques y el pie de rey ($\delta T$):
+De manera análoga, para el gradiente térmico diferencial $\delta T$ entre los bloques
+y el pie de rey, con $\Delta t = \max(\Delta t_1, \Delta t_2)$ la máxima diferencia
+térmica entre ambos cuerpos,
 
 \begin{equation}
-    \sigma^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2 + \frac{\Delta t^2}{3} + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2 + \frac{UT_{der}^2}{3}
+    \sigma^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2 + \frac{\Delta t^2}{3}
+    + \left(\frac{d_T / m_T}{\sqrt{3}}\right)^2 + \frac{UT_{der}^2}{3} .
     \label{eq:sigma-deltaT}
 \end{equation}
 
-donde $\Delta t = \max(\Delta t_1, \Delta t_2)$ representa la máxima diferencia térmica entre ambos cuerpos. Al haberse mantenido bloque y pie de rey en el mismo ambiente, esa diferencia también es nula, y por tanto
+Al permanecer bloque y pie de rey en el mismo ambiente esa diferencia también es
+nula, de modo que
 
 \begin{equation}
-    \sigma(\delta T) \approx 0.383\ ^\circ\text{C}
+    \therefore\quad \sigma(\delta T) \approx 0.383\ ^\circ\text{C}.
     \label{eq:sigma-deltaT-valor}
 \end{equation}
 
-\paragraph{Contribución efectiva de los términos térmicos}
-Las incertidumbres anteriores no se transmiten al resultado, porque los coeficientes
-de sensibilidad que las multiplican en la ecuación~\eqref{eq:sigma-final} se anulan:
-ambos cuerpos son de acero, de modo que $\delta\alpha = \alpha_i - \alpha_{BP} = 0$, y
-ambos están a la misma temperatura, de modo que $\delta T = 0$. El único término
-térmico que sobrevive es $[L_i\,\Delta T_i]^2 \sigma^2(\delta\alpha)$, que evaluado en
-el extremo del alcance ($L_i = 250$ mm, $\Delta T_i = 1.5\ ^\circ\text{C}$) vale
+\subsubsection*{Contribución efectiva de los términos térmicos}
 
-\begin{equation}
-    (250 \times 1.5)^2 \left(8.16\times10^{-7}\right)^2\ \mu\text{m}^2
+Las incertidumbres anteriores se transmiten al resultado ponderadas por los
+coeficientes de sensibilidad que las multiplican en la
+ecuación~\eqref{eq:sigma-final}. Como ambos cuerpos son de acero,
+$\delta\alpha = \alpha_i - \alpha_{BP} = 0$, y como ambos están a la misma
+temperatura, $\delta T = 0$. Evaluando los coeficientes~\eqref{eq:sens-deriv} con
+esos valores,
+
+\begin{align*}
+    [1 + \delta\alpha\,\Delta T_i]^2 &= 1, &
+    [-1 + \alpha_{BP}\,\delta T]^2 &= 1, \\
+    [L_i\,\Delta T_i]^2 &\neq 0, &
+    [L_i\,\delta\alpha]^2 &= 0, \\
+    [L_{BP}\,\delta T]^2 &= 0, &
+    [L_{BP}\,\alpha_{BP}]^2 &\neq 0,
+\end{align*}
+
+de modo que solo sobreviven dos términos térmicos. Evaluados en el extremo del
+alcance ($L_i = 250$ mm, $\Delta T_i = 1.5\ ^\circ\text{C}$):
+
+\begin{align}
+    [L_i\,\Delta T_i]^2 \sigma^2(\delta\alpha)
+    &= (250 \times 1.5)^2 \left(8.16\times10^{-7}\right)^2\ \mu\text{m}^2
     \approx 9.4\times10^{-8}\ \mu\text{m}^2,
-    \label{eq:termino-termico}
-\end{equation}
+    \label{eq:termino-termico} \\
+    [L_{BP}\,\alpha_{BP}]^2 \sigma^2(\delta T)
+    &\approx 1\times10^{-9}\ \mu\text{m}^2 .
+    \label{eq:termino-termico-2}
+\end{align}
 
-es decir diez órdenes de magnitud por debajo de $\sigma^2(L_i) = 667.6\ \mu\text{m}^2$.
-Los parámetros térmicos son, en consecuencia, irrelevantes para la incertidumbre del
-error de indicación de este instrumento en las condiciones de ensayo.
+Ambos son diez órdenes de magnitud menores que
+$\sigma^2(L_i) = 667.6\ \mu\text{m}^2$; los parámetros térmicos son, en consecuencia,
+irrelevantes para la incertidumbre del error de indicación de este instrumento en las
+condiciones de ensayo.
 
 \subsubsection{Incertidumbre estándar combinada y expandida final}
 
-Sustituyendo las componentes~\eqref{eq:sigma-Li-total},~\eqref{eq:sigma-LBP-total},~\eqref{eq:sigma-dalpha},~\eqref{eq:sigma-deltaTi} y~\eqref{eq:sigma-deltaT} en la ley de propagación de varianzas de la ecuación~\eqref{eq:sigma-final}, la varianza combinada del error de indicación queda expresada en forma completamente desarrollada como:
+Sustituyendo las componentes~\eqref{eq:sigma-Li-total},~\eqref{eq:sigma-LBP-total},
+\eqref{eq:sigma-dalpha},~\eqref{eq:sigma-deltaTi} y~\eqref{eq:sigma-deltaT} en la ley
+de propagación de varianzas de la ecuación~\eqref{eq:sigma-final}, la varianza
+combinada del error de indicación queda expresada en forma completamente desarrollada
+como
 
 \begin{align}
     \sigma_c^2(E) &=
@@ -312,11 +389,13 @@ Sustituyendo las componentes~\eqref{eq:sigma-Li-total},~\eqref{eq:sigma-LBP-tota
     \Bigg] \label{eq:sigma-cuad-expandida}
 \end{align}
 
-Finalmente, la incertidumbre expandida $U(E)$ para el error de indicación del pie de rey se reporta mediante:
+Finalmente, la incertidumbre expandida de $E$ se define a partir de la desviación
+estándar combinada de la ecuación~\eqref{eq:error-std-values} mediante
 
 \begin{equation}
-    U(E) = k \cdot \sigma_c(E) = k \sqrt{\sigma_c^2(E)}
+    U(E) = k\,\sigma_c(E) = k\sqrt{\sigma_c^2(E)},
     \label{eq:incertidumbre-expandida}
 \end{equation}
 
-adoptando un factor de cobertura $k = 2$, correspondiente a un nivel de confianza bilateral aproximado del 95\,\%.
+adoptando un factor de cobertura $k = 2$, correspondiente a un nivel de confianza
+bilateral aproximado del 95\,\%.

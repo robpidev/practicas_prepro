@@ -1,81 +1,98 @@
 \subsubsection{Reducción de datos y error de contacto de la superficie parcial}
 \label{sec:pie-rey-reduccion}
 
-\paragraph{Valor patrón corregido}
-El valor de referencia de cada punto de calibración es la longitud de la pila de
-bloques corregida por las desviaciones de su certificado y por la diferencia entre
-la temperatura de ensayo y la temperatura de referencia ($20\ ^\circ$C):
+Sea $T_k$ la temperatura registrada en el punto de calibración $k$ y
+$T_0 = 20\ ^\circ\text{C}$ la temperatura de referencia. El valor de referencia de
+cada punto es la longitud de la pila de bloques referida a $T_0$; por la
+ecuación~\eqref{eq:e-termal}, e incorporando la corrección de certificado
+$c_{cert,k}$,
 
-\begin{equation}
-  VPC_k = VP_k + c_{cert,k} + \alpha_{BP}\, L_k\,(T_k - 20)
+\begin{align}
+  VPC_k &= VP_k + c_{cert,k} + \alpha_{BP}\, L_k\,(T_k - T_0),
   \label{eq:vpc}
-\end{equation}
+\end{align}
 
-donde $VP_k$ es el valor nominal de la pila, $c_{cert,k}$ la corrección acumulada
-de los bloques que la componen según su certificado de calibración,
-$\alpha_{BP} = 11.5\times 10^{-6}\ ^\circ\text{C}^{-1}$ el coeficiente de
-expansión térmica del acero de los bloques y $L_k \approx VP_k$.
-
-De forma análoga, la indicación del pie de rey se refiere a $20\ ^\circ$C
-mediante
+donde $VP_k$ es el valor nominal de la pila, $c_{cert,k}$ la corrección acumulada de
+los bloques que la componen según su certificado,
+$\alpha_{BP} = 11.5\times 10^{-6}\ ^\circ\text{C}^{-1}$ el coeficiente de expansión
+térmica del acero de los bloques y $L_k \approx VP_k$. De forma análoga, la
+indicación del pie de rey se refiere a $T_0$ según
 
 \begin{equation}
-  PC_{kj} = X_{kj}\left[1 - \alpha_i (T_k - 20)\right]
+  PC_{kj} = X_{kj}\left[1 - \alpha_i (T_k - T_0)\right],
   \label{eq:pc}
 \end{equation}
 
-Como el pie de rey y los bloques son de acero ($\alpha_i = \alpha_{BP}$) y se
-encuentran a la misma temperatura, el factor térmico es común a ambos y se cancela
-en la diferencia. En consecuencia, la diferencia de indicación del punto $k$ en la
-posición $j$ queda
+donde $X_{kj}$ es la lectura en la posición $j$ del punto $k$.
+
+El error de indicación de cada posición es la diferencia entre ambas reducciones.
+Sustituyendo \eqref{eq:vpc} y \eqref{eq:pc} y desarrollando,
+
+\begin{align}
+  D_{kj} &= PC_{kj} - VPC_k \nonumber\\
+  &= X_{kj} - X_{kj}\alpha_i (T_k - T_0) - VP_k - c_{cert,k}
+     - \alpha_{BP}\,L_k (T_k - T_0). \label{eq:D-desarrollo}
+\end{align}
+
+Como $X_{kj} \approx L_k \approx VP_k$ en los términos correctivos y el pie de rey y
+los bloques son de acero ($\alpha_i = \alpha_{BP} = \alpha$),
+
+\begin{align*}
+  D_{kj} &= X_{kj} - VP_k - c_{cert,k}
+     - \alpha\,VP_k (T_k - T_0) + \alpha\,VP_k (T_k - T_0) \\
+  &= X_{kj} - VP_k - c_{cert,k},
+\end{align*}
+
+es decir
 
 \begin{equation}
-  D_{kj} = PC_{kj} - VPC_k \approx X_{kj} - VP_k - c_{cert,k}
+  \therefore\quad D_{kj} \approx X_{kj} - VP_k - c_{cert,k},
   \label{eq:D}
 \end{equation}
 
-expresada en micrómetros. Conviene notar que la corrección de certificado es
-constante dentro de cada punto y, por tanto, tampoco interviene en la dispersión:
-el error de contacto que se calcula a continuación es independiente de $c_{cert,k}$
-y de la corrección térmica.
+expresada en micrómetros. La corrección térmica se cancela por ser común a ambos
+cuerpos, y la corrección de certificado es constante dentro de cada punto, de modo
+que tampoco interviene en la dispersión: el error de contacto que se calcula a
+continuación es independiente de $c_{cert,k}$ y de la corrección térmica.
 
-La Tabla~\ref{tab:pie-rey-vpc} presenta, para cada punto, el valor patrón
-corregido, el promedio corregido de las tres lecturas y el error de indicación
-resultante. Al no disponer de las desviaciones certificadas de los bloques, se
-adopta $c_{cert,k} = 0$; esta hipótesis no afecta al cálculo de $E$, pero sí al
-error de indicación reportado en cada punto.
+La Tabla~\ref{tab:pie-rey-vpc} presenta, para cada punto, el valor patrón corregido,
+el promedio corregido de las tres lecturas y el error de indicación resultante. Al no
+disponer de las desviaciones certificadas de los bloques, se adopta $c_{cert,k} = 0$;
+esta hipótesis no afecta al cálculo de $E$, pero sí al error de indicación reportado
+en cada punto.
 
 \input{c3-calibration/pie-de-rey/tablas/t2.tex}
 
-La Tabla~\ref{tab:pie-rey-diferencias} presenta las diferencias $D_{kj}$ en los
-cinco puntos de calibración, junto con la dispersión $E_k$ de cada uno.
+\subsubsection*{Error de contacto de la superficie parcial en medición de exteriores}
 
-\input{c3-calibration/pie-de-rey/tablas/t3.tex}
-
-\paragraph{Error de contacto de la superficie parcial en medición de exteriores ($E$)}
-El error de contacto se define como la mayor de las dispersiones observadas entre
-las tres posiciones de medición:
+Sea $E_k$ la dispersión de las tres posiciones en el punto $k$. El error de contacto
+se define como la mayor de las dispersiones observadas,
 
 \begin{equation}
-  E = \max_k \left( \max_j D_{kj} - \min_j D_{kj} \right)
+  E = \max_k \left( \max_j D_{kj} - \min_j D_{kj} \right),
   \label{eq:E}
 \end{equation}
 
+cuyos valores se recogen en la Tabla~\ref{tab:pie-rey-diferencias}.
+
+\input{c3-calibration/pie-de-rey/tablas/t3.tex}
+
 Sustituyendo los valores de la Tabla~\ref{tab:pie-rey-diferencias}, la mayor
-dispersión aparece simultáneamente en los puntos de $100$ mm y $200$ mm. Conforme
-al criterio del procedimiento, se selecciona el de mayor valor nominal:
+dispersión ($50\ \mu\text{m}$) aparece simultáneamente en los puntos de $100$ mm y
+$200$ mm, de modo que el máximo de \eqref{eq:E} no es único. Conforme al criterio del
+procedimiento, se selecciona el de mayor valor nominal:
 
 \begin{equation}
-  \therefore\ E = 50\ \mu\text{m} \quad \text{en } 200 \text{ mm}
+  \therefore\quad E = 50\ \mu\text{m} \quad \text{en } 200 \text{ mm}.
   \label{eq:E-valor}
 \end{equation}
 
-Este resultado identifica además el punto crítico del instrumento para la prueba
-de repetibilidad. Bajo el supuesto de una distribución rectangular de semiamplitud
-$E/2$, la contribución a la incertidumbre de la indicación es
+Este resultado identifica además el punto crítico del instrumento para la prueba de
+repetibilidad. Bajo el supuesto de una distribución rectangular de semiamplitud
+$E/2$, la ecuación~\eqref{eq:sigma-rectangular} con $a = E/2$ proporciona
 
 \begin{equation}
-  \sigma(L_{i_E}) = \frac{E}{2\sqrt{3}}
-  = \frac{50}{2\sqrt{3}}\ \mu\text{m} \approx 14.43\ \mu\text{m}
+  \sigma(L_{i_E}) = \frac{2a}{2\sqrt{3}} = \frac{E}{2\sqrt{3}}
+  = \frac{50}{2\sqrt{3}}\ \mu\text{m} \approx 14.43\ \mu\text{m}.
   \label{eq:sigma-LiE}
 \end{equation}

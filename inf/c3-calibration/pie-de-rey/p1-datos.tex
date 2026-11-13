@@ -37,21 +37,28 @@ $S_{E-P}$ & Error por cambio de la escala de exteriores a profundidad
 \subsubsection{Datos experimentales}
 \label{sec:pie-rey-datos}
 
-Las mediciones se realizaron en cinco puntos distribuidos sobre el alcance del
-instrumento, formando la pila de bloques patrón por acumulación: $50$ mm (un
-bloque), $100$ mm (un bloque), $150$ mm (dos bloques), $200$ mm (tres bloques) y
-$250$ mm (cuatro bloques). En cada punto se efectuaron tres mediciones
-correspondientes a las posiciones superior, central e inferior de las mordazas de
-medición de exteriores, conforme al ítem 10.1.2 de la norma PC-012. La temperatura
-registrada fue de $21.5\ ^\circ$C en los cinco puntos, tal como se realizaron las
-mediciones.
+Sea el alcance del instrumento el intervalo de longitudes que puede medir. Sobre él
+se seleccionan cinco puntos de calibración formando la pila de bloques patrón por
+acumulación: $50$ mm (un bloque), $100$ mm (un bloque), $150$ mm (dos bloques),
+$200$ mm (tres bloques) y $250$ mm (cuatro bloques). En cada punto se efectúan tres
+mediciones correspondientes a las posiciones superior, central e inferior de las
+mordazas de medición de exteriores, conforme al ítem 10.1.2 de la norma PC-012. La
+temperatura registrada es de $21.5\ ^\circ$C en los cinco puntos, tal como se
+realizaron las mediciones.
 
-El pie de rey 530-115 es un instrumento de vernier cuya escala principal está
-dividida en milímetros y cuyo nonio consta de 20 divisiones que abarcan 19 mm. La
-diferencia entre una división de la escala principal y una del nonio define la
-resolución del instrumento, $d = 1 - 19/20 = 0.05$ mm, de modo que toda lectura es
-un múltiplo de dicha división. Las lecturas que se presentan a continuación respetan
-esa graduación.
+La resolución del instrumento se deduce de la geometría de su escala. El pie de rey
+530-115 es un instrumento de vernier cuya escala principal está dividida en
+milímetros, mientras que el nonio consta de $m = 20$ divisiones que abarcan $19$ mm.
+Si $d_p$ es la división de la escala principal y $d_n$ la del nonio, entonces
+
+\begin{equation}
+    d_n = \frac{19}{20}\,d_p \quad\Longrightarrow\quad
+    d = d_p - d_n = d_p\left(1 - \frac{19}{20}\right) = 0.05\ \text{mm},
+    \label{eq:resolucion-vernier}
+\end{equation}
+
+de modo que toda lectura es un múltiplo de $d$. Las lecturas que se presentan a
+continuación respetan esa graduación.
 
 La Tabla~\ref{tab:pie-rey-datos} recoge las mediciones de los cinco puntos. La
 columna BU indica los bloques que componen cada pila y la columna $VP$ el valor
