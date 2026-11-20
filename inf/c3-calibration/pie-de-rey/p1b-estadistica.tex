@@ -1,0 +1,99 @@
+\subsubsection{Cálculo estadístico elemental}
+\label{sec:pie-rey-estadistica}
+
+Sea $X_{kj}$ la lectura de la posición $j$ en el punto de calibración $k$, con
+$j = 1, 2, 3$ correspondientes a las posiciones superior, central e inferior. Antes
+de introducir cualquier corrección se calcula la estadística directa de esas
+mediciones.
+
+El promedio de las $n = 3$ posiciones de un punto se obtiene aplicando la media
+muestral de la ecuación~\eqref{eq:media-muestral}, y su dispersión con la varianza
+insesgada de la ecuación~\eqref{eq:varianza-muestral-insesgada}. La incertidumbre de
+ese promedio sigue la desviación estándar de la media deducida en la
+ecuación~\eqref{eq:sigma-media-experimental}.
+
+Lo que no tiene precedente en el desarrollo anterior es el error de indicación
+elemental, que se define como la diferencia entre el promedio y el valor nominal del
+patrón, sin corrección térmica ni de certificado:
+
+\begin{equation}
+    \therefore\quad
+    E_k^{\text{simple}} = \bk{X}_n - VP_k .
+    \label{eq:E-simple}
+\end{equation}
+
+La Tabla~\ref{tab:pie-rey-estadistica} recoge estos resultados para los cinco puntos.
+Los errores simples alcanzan $33.3\ \mu\text{m}$ en los puntos de $150$ mm y $200$ mm
+y se anulan en los extremos del alcance, donde las tres lecturas coinciden.
+
+\input{c3-calibration/pie-de-rey/tablas/t7.tex}
+
+\subsubsection*{Dispersión nula e insuficiencia del cálculo por punto}
+
+Las desviaciones estándar resultan nulas en $50$ mm y en $250$ mm, y de
+$0.0289$ mm en los tres puntos restantes. Un valor nulo no indica ausencia de
+dispersión: indica que las tres lecturas coinciden exactamente dentro de la
+graduación del instrumento.
+
+La resolución del pie de rey es $d = 0.05$ mm, ecuación~\eqref{eq:resolucion-vernier},
+de modo que dos lecturas de una misma posición solo pueden diferir en múltiplos
+exactos de esa cantidad y la diferencia entre la mayor y la menor está acotada por
+el paso de graduación. Con tres repeticiones, la varianza muestral de la
+ecuación~\eqref{eq:varianza-muestral-insesgada}, evaluada sobre diferencias que no
+pueden exceder $d$ en valor absoluto, solo admite dos valores extremos:
+
+\begin{equation}
+    s \in \left\{ 0,\ \frac{d}{\sqrt{3}} \right\}
+    \quad\Longrightarrow\quad
+    s \in \{ 0,\ 0.0289 \}\ \text{mm},
+    \label{eq:s-posibles}
+\end{equation}
+
+que es lo que se observa en la tabla. La estadística tipo~A no puede, por tanto,
+caracterizar la repetibilidad del instrumento con tres lecturas por punto: la
+resolución es demasiado gruesa frente a la dispersión del pie de rey.
+
+\subsubsection*{Repetibilidad del instrumento}
+
+Sea $R_p$ la lectura repetida $p$-ésima en un mismo punto, con $n = 5$ repeticiones
+consecutivas en $250$ mm. El rango de las repeticiones es
+
+\begin{equation}
+    R = \max_p R_p - \min_p R_p,
+    \label{eq:rango-repetidas}
+\end{equation}
+
+y la dispersión del conjunto se calcula con la varianza insesgada de la
+ecuación~\eqref{eq:varianza-muestral-insesgada}, mientras que la incertidumbre de su
+promedio sigue la ecuación~\eqref{eq:sigma-media-experimental},
+
+\begin{equation}
+    \therefore\quad
+    \sigma(L_{i_R}) = \frac{s_R}{\sqrt{n}} .
+    \label{eq:sigma-LiR-simple}
+\end{equation}
+
+Con las cinco lecturas de $250$ mm se obtiene $R = 50\ \mu\text{m}$ y
+$s_R = 27.39\ \mu\text{m}$, de modo que
+
+\begin{equation}
+    \sigma(L_{i_R}) = \frac{27.39}{\sqrt{5}}\ \mu\text{m}
+    \approx 12.25\ \mu\text{m}.
+    \label{eq:sigma-LiR-simple-valor}
+\end{equation}
+
+Esta es la única estimación tipo~A aprovechable del conjunto.
+
+\subsubsection*{Alcance y límites del cálculo elemental}
+
+El cálculo anterior no distingue el origen de las diferencias observadas. El error de
+indicación de la ecuación~\eqref{eq:E-simple} mezcla el comportamiento del
+instrumento con el estado del patrón y con las condiciones ambientales en que se
+realizaron las mediciones: un valor no nulo puede deberse al pie de rey, a la pila de
+bloques o a la dilatación térmica de ambos cuerpos. Tampoco permite asignar una
+incertidumbre al resultado, porque la dispersión por punto es incompatible con la
+resolución del instrumento, como muestra la ecuación~\eqref{eq:s-posibles}.
+
+El modelo que se desarrolla a continuación descompone el error en sus contribuciones
+—de contacto, de repetibilidad, de escala, geométricas, de resolución y térmicas— y
+permite propagar la incertidumbre de cada una hasta el resultado final.

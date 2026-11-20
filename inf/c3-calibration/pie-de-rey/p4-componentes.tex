@@ -9,9 +9,14 @@
 Sea $L_i$ la indicación del pie de rey. Conforme a la
 ecuación~\eqref{eq:discrete-std-x-i}, su varianza es
 $\sigma^2(L_i) = \bk{(L_i - \bk{L_i})^2}$, suma en cuadratura de las componentes
-independientes que la afectan. Para cada componente acotada en un intervalo de
-semiamplitud $a$ se aplica la distribución rectangular deducida en el marco
-teórico, ecuación~\eqref{eq:sigma-rectangular}, de modo que
+independientes que la afectan. Salvo la componente de repetibilidad, que se obtiene
+de lecturas repetidas y constituye una evaluación tipo~A según la
+ecuación~\eqref{eq:sigma-media-experimental}, todas las componentes restantes son
+evaluaciones tipo~B~\parencite{jcgm2008gum}: no provienen de repeticiones, sino de
+especificaciones del fabricante, del procedimiento de calibración o de fronteras
+acotadas conocidas. Para cada una de ellas, acotada en un intervalo de semiamplitud
+$a$, se aplica la distribución rectangular deducida en el marco teórico,
+ecuación~\eqref{eq:sigma-rectangular}, de modo que
 
 \begin{equation}
     \sigma^2 = \int_\Omega (x - \bk{x})^2 P(x)\,dx = \frac{a^2}{3}
@@ -26,12 +31,12 @@ estiman las restantes aplicando \eqref{eq:componente-general}.
 
 \subsubsection*{Error de repetibilidad de contacto de la superficie parcial}
 
-Sea $R_p$ cada una de las $n$ lecturas repetidas y $\bar{R}$ su media aritmética
-muestral. La dispersión experimental (evaluación tipo~A) se estima con la desviación
-estándar muestral
+Sea $R_p$ cada una de las $n$ lecturas repetidas y $\bk{R}_n$ su media muestral. La
+dispersión experimental (evaluación tipo~A) se estima con la desviación estándar
+muestral
 
 \begin{equation}
-    s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^n (R_p - \bar{R})^2},
+    s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^n (R_p - \bk{R}_n)^2},
     \label{eq:desv-estandar-muestral}
 \end{equation}
 
@@ -61,7 +66,7 @@ desviación estándar experimental $s_R = 27.39\ \mu\text{m}$, de modo que
 Las cinco repeticiones se tomaron en una tanda distinta de las mediciones de la
 Tabla~\ref{tab:pie-rey-datos}, donde las tres lecturas de $250$ mm fueron
 $250.00$ mm. La diferencia de $0.08$ mm entre la media de las repeticiones
-($\bar{R} = 250.08$ mm) y aquella lectura corresponde a una deriva instrumental
+($\bk{R}_n = 250.08$ mm) y aquella lectura corresponde a una deriva instrumental
 entre ambas series, no a dispersión aleatoria, y por ello no se suma a
 $\sigma(L_i)$: la ecuación~\eqref{eq:sigma-LiR} cuantifica únicamente la dispersión
 interna de la tanda repetida.

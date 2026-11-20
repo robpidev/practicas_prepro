@@ -187,7 +187,8 @@ cuadrada del número de variables.
   \label{eq:std-relative}
 \end{equation}
 
-\subsubsection{Varianza de una muestra y el factor \texorpdfstring{$1/(n-1)$}{1/(n-1)}}
+\subsubsection{Varianza de una muestra y el factor
+\texorpdfstring{$1/(n-1)$}{1/(n-1)}}
 
 En las secciones previas se definió el valor medio teorico como $\mu
 = \langle x \rangle$. Pero en un experimento solo tenemos $n$
@@ -259,3 +260,17 @@ Con lo cual la desviacion estandar del promedio queda:
   \sigma(\bk{x}_n) = \frac{s}{\sqrt{n}}
   \label{eq:sigma-media-experimental}
 \end{equation}
+
+La desviación estándar de la media de la
+ecuación~\eqref{eq:sigma-media-experimental} proviene de observaciones
+repetidas y constituye lo que la GUM~\parencite{jcgm2008gum} denomina
+\textit{evaluación tipo~A} de la incertidumbre.
+
+No todas las componentes se estiman así. Cuando la información disponible
+no proviene de repeticiones sino de una especificación del fabricante, un
+certificado de calibración o una frontera acotada conocida, la GUM
+denomina a su tratamiento \textit{evaluación tipo~B}. En ese caso no se
+aplica la ecuación~\eqref{eq:sigma-media-experimental}, sino que la
+dispersión se deduce de la distribución de probabilidad que describe la
+información disponible. El caso más frecuente es la distribución
+rectangular, que se desarrolla a continuación.
