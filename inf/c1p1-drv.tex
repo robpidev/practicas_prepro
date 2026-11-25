@@ -1,4 +1,4 @@
-\section{Variables aleatorias discretas}
+\subsection{Variables aleatorias discretas}
 Para la deducción de las definiciones y ecuaciones de esta sección se seguirá
 según~\cite{swendsen2012introduction} en el capítulo 3.
 
@@ -6,7 +6,7 @@ Un evento elemental es un resultado individual y exlusivo de un experimento, tal
 que puede ocurrir una y solamente uno a la vez, Ejem. cuando se lanza una
 moneda se tiene el resultado de que la moneda salga cara o sello.
 
-\subsection{Variable aleatorias}
+\subsubsection{Variable aleatorias}
 Sea $A = \set{a_j}_{j = 1}^N$ un conjunto de eventos elementales donde a cada
 evento $a_j$ se le asigna una probabilidad $P(a_j)$, que por
 simplicidad escribiremos (A, P(a)), a esto llamaremos
@@ -35,7 +35,7 @@ Que por simplicidad escribiremos
   \label{eq:prob-total-sim}
 \end{equation}
 
-\subsection{Probablidad de multiples variables aleatorias discretas}
+\subsubsection{Probablidad de multiples variables aleatorias discretas}
 Supongamos que se tienen dos eventos elementales
 $A=\set{a_i}_{i=1}^N$ y $B=\set{b_j}_{j=1}^M$,
 entonces la probabilidad conjunta para $a_i$ y $b_j$ es
@@ -59,7 +59,7 @@ que por simplicidad escribiremos
   \label{eq:prob-conjunta-total-sim}
 \end{equation}
 
-\subsubsection*{Probabilidad marginal}
+\paragraph*{Probabilidad marginal}
 Si queremos recuperar la probablidad $P_A(a_j)$ al cual denominaremos
 \textit{Probablidad marginal}, es lógico que sumaremos todas las
 probablidades sobre $B$ así obtenemos
@@ -69,7 +69,7 @@ probablidades sobre $B$ así obtenemos
   \label{eq:prob-marginal}
 \end{equation}
 
-\subsubsection*{Probabilidad condicional}
+\paragraph*{Probabilidad condicional}
 Supongamos que queremos la probablidad de que ocurra el evento
 $a$ dado que ocurrio $b$ el cual notaremos como $P(a|b)$, asumiendo
 que que la probablidad $P_B(b) \neq 0$ entonces esta será
@@ -80,7 +80,7 @@ que que la probablidad $P_B(b) \neq 0$ entonces esta será
 \end{equation}
 
 % === Funciones aleatorias y Números Aleatorios ===
-\subsection{Funciones aleatorias de una variable y Números Aleatorios}
+\subsubsection{Funciones aleatorias de una variable y Números Aleatorios}
 Sea el conjunto de eventos elementales $A = \set{a_j}_{j = 1}^{N_A}$ junto a
 su probablidad $P(a_i)$, podemos definir sobre este número aleatorio
 una función númerica $F = \set{F(a_j)}_{j = 1}^{N_A}$ tal que
@@ -114,7 +114,7 @@ tomando cada uno de los eventos particulares correspondientes a $G$
   \label{eq:prob-g}
 \end{equation}
 
-\subsection{Media, Variancia y Desviación Estándar}
+\subsubsection{Media, Variancia y Desviación Estándar}
 
 La media o promedio de una función $F(A)$, sobre $(A, P(a))$ se define
 como

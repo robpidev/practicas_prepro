@@ -15,6 +15,9 @@
 \usetikzlibrary{arrows.meta, positioning}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\setlength{\marginparwidth}{1.7cm}
+\setlength{\marginparsep}{0.3cm}
+\usepackage[textsize=scriptsize]{todonotes}
 
 % ==== Apa style ====
 \usepackage[spanish,es-nodecimaldot]{babel}
@@ -51,18 +54,170 @@ x_j}\right|_{\vec x = \vec\mu}}
   urlcolor=cyan!60!black,
   filecolor=magenta!60!black
 ]{hyperref}
-\author{Trres Tarrillo Rober}
-\title{Informe de prácticas}
+
 \begin{document}
-%  \doublespacing
-\maketitle
+% ===== Portada institucional =====
+\begin{titlepage}
+\centering
+{\Large UNIVERSIDAD NACIONAL DE PIURA}\\[4pt]
+{\large FACULTAD DE CIENCIAS}\\[4pt]
+{\large ESCUELA PROFESIONAL DE FÍSICA}\\[3cm]
+
+{\Large\bfseries INFORME DE PRÁCTICAS PRE-PROFESIONALES}\\[6pt]
+{\Large\bfseries METROLOGÍA Y ENSAYOS NO DESTRUCTIVOS}\\[3cm]
+
+\begin{tabular}{ll}
+ASESOR DE PRÁCTICAS & Dr. Francisco Arévalo Olivares\\[6pt]
+ESTUDIANTE          & Rober Esbel Torres Tarrillo
+\end{tabular}\\[3cm]
+
+PIURA -- 2026
+\end{titlepage}
+
+% ===== Datos de la empresa =====
+\newpage
+{\centering
+{\Large PHYSICS TECHNOLOGY INVESTIGATION (PHYTECHIN EIRL)}\\[1.5cm]
+
+\begin{tabular}{ll}
+RUC                       & 20525601952\\[6pt]
+ACTIVIDADES DE LA EMPRESA & Metrología\\
+                          & Ensayos no destructivos (END)\\
+                          & Capacitaciones y asesorías\\[6pt]
+GERENTE                   & Dr. Francisco Arévalo Olivares\\[6pt]
+PERIODO DE PRÁCTICAS      & Por completar\\[6pt]
+HORAS ACUMULADAS          & 300
+\end{tabular}
+\par}
+
+\vspace{12pt}
+\todo{Completar el periodo exacto de prácticas (el modelo de referencia indica
+05 de agosto de 2025 -- 14 de mayo de 2026).}
+
+\newpage
 \tableofcontents
 \newpage
+
+\section{Introducción}
+
+La metrología es la ciencia que establece las bases de la medición y garantiza que
+los resultados obtenidos en el laboratorio o en la industria sean comparables,
+confiables y trazables a patrones de referencia. En este contexto, la calibración
+de instrumentos de medición constituye el procedimiento mediante el cual se
+comprueba su comportamiento frente a un patrón de mayor exactitud, se cuantifican
+sus errores de indicación y se estima la incertidumbre asociada conforme a la
+guía GUM~\parencite{jcgm2008gum}.
+
+El presente informe documenta las actividades de calibración desarrolladas durante
+las prácticas pre-profesionales realizadas en Physics Technology Investigation
+(PHYTECHIN EIRL). El trabajo se centró en dos instrumentos de medición de longitud:
+un pie de rey Mitutoyo 530-115 y un comparador digital de cuadrante Mitutoyo
+ID-S1012M, ambos calibrados por comparación directa con bloques patrón siguiendo
+los procedimientos normalizados del INACAL~\parencite{inacal_pc012,inacal_pc014}
+y la norma ISO~3650~\parencite{iso3650_1998}.
+
+El análisis se apoya en los fundamentos de probabilidad y en la ley de propagación
+de incertidumbres que se desarrollan en el marco teórico. Las componentes de
+incertidumbre tipo~A se obtuvieron del tratamiento estadístico de lecturas
+repetidas, en tanto que las componentes tipo~B se evaluaron a partir de
+certificados de calibración, especificaciones del fabricante y límites conocidos,
+empleando la distribución de probabilidad adecuada a cada caso. Como resultado se
+obtuvieron las expresiones de la incertidumbre combinada y expandida, así como la
+declaración de conformidad del pie de rey según la regla de decisión de la guía
+ILAC-G8~\parencite{ilac2019decision}.
+
+El resto del documento se organiza como sigue: los objetivos del trabajo, el marco
+teórico con las herramientas estadísticas empleadas, los procedimientos de
+calibración con sus resultados numéricos, los logros y conclusiones del periodo de
+prácticas, y las referencias que sustentan el análisis.
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+
+Realizar la calibración de instrumentos de medición de longitud empleando patrones
+certificados y procedimientos normalizados, y cuantificar la incertidumbre de las
+mediciones mediante la ley de propagación de errores.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+  \item Aplicar los procedimientos de calibración del INACAL para el pie de rey y el
+        reloj comparador por comparación directa con bloques
+        patrón~\parencite{inacal_pc012,inacal_pc014}.
+  \item Estimar las componentes de incertidumbre tipo~A a partir de lecturas repetidas
+        y las componentes tipo~B a partir de certificados, especificaciones y
+        fronteras acotadas, según la guía GUM~\parencite{jcgm2008gum}.
+  \item Obtener la incertidumbre combinada y expandida del error de indicación y
+        declarar la conformidad del instrumento según la regla de decisión
+        ILAC-G8~\parencite{ilac2019decision}.
+  \item Documentar los cálculos, las tablas y los resultados de manera trazable y
+        reproducible.
+\end{itemize}
+
+\section{Marco teórico}
 \input{c1p1-drv.tex}
 \input{c1p2-va-dis-mult.tex}
 \input{c1p3-va-con-mult.tex}
 \input{c1p4-errors.tex}
+
 \input{c3-calibration/mod.tex}
 
+\todo{Incorporar la sección de calibración por ultrasonido (3.3) cuando se disponga
+de los datos experimentales.}
+
+\section{Logros}
+
+Durante el periodo de prácticas se consolidaron los siguientes resultados:
+
+\begin{itemize}
+  \item Se calibró el pie de rey Mitutoyo 530-115 en el intervalo de $50$ a
+        $250\ \text{mm}$, con una incertidumbre expandida de
+        $U(E) \approx 51.68\ \mu\text{m}$ ($k = 2$). El error máximo de indicación
+        fue de $+28.2\ \mu\text{m}$ en $150\ \text{mm}$, inferior al
+        $\text{EMPE} = \pm 80\ \mu\text{m}$ especificado por el fabricante, y la
+        razón $U(E)/\text{EMPE} \approx 0.65$ permitió aplicar la regla de decisión
+        para evaluar la conformidad punto por punto.
+  \item Se calibró el comparador digital Mitutoyo ID-S1012M entre $1$ y
+        $10\ \text{mm}$, obteniéndose un alcance de error de $5\ \mu\text{m}$ y una
+        incertidumbre expandida que crece de $3.21$ a $3.33\ \mu\text{m}$ en todo el
+        intervalo ensayado.
+  \item Se aplicó de forma integrada la ley de propagación de incertidumbres
+        desarrollada en el marco teórico, identificando las componentes dominantes
+        en cada instrumento: la planitud de la mesa de soporte en el comparador, y
+        el error de contacto y la resolución en el pie de rey.
+  \item Se documentaron los cálculos en tablas y figuras que permiten reproducir
+        cada etapa del análisis, desde los datos experimentales hasta la
+        declaración de conformidad.
+\end{itemize}
+
+\section{Conclusiones}
+
+\begin{itemize}
+  \item Los dos instrumentos calibrados presentan errores de indicación dentro de la
+        tolerancia especificada por el fabricante. En el pie de rey, no obstante, el
+        margen respecto al $\text{EMPE}$ es reducido: dos de los cinco puntos quedan
+        en la zona de incertidumbre de la regla ILAC-G8, por lo que se recomienda
+        repetir la calibración ante golpes o desgaste apreciable.
+  \item La incertidumbre expandida del pie de rey ($51.68\ \mu\text{m}$) está dominada
+        por las componentes de contacto y resolución, mientras que los términos
+        térmicos resultan despreciables al ser el bloque y el instrumento del mismo
+        material y estar a la misma temperatura.
+  \item En el reloj comparador la incertidumbre expandida es de
+        $3.33\ \mu\text{m}$ en el extremo del alcance ensayado, con una dependencia
+        muy débil de la longitud; la componente predominante es la planitud de la
+        mesa de soporte.
+  \item El desarrollo del marco teórico permitió conectar la estimación estadística
+        de la repetibilidad con la evaluación tipo~B de las demás fuentes, y aplicar
+        consistentemente la ley de propagación de errores a ambos procedimientos.
+  \item \todo{Completar con las conclusiones correspondientes a la calibración por
+        ultrasonido, cuando esa sección sea incorporada.}
+\end{itemize}
+
+\section{Anexos}
+\todo{Agregar aquí los anexos: certificados de calibración, tablas de datos,
+figuras y código de los notebooks.}
+
+\addcontentsline{toc}{section}{\refname}
 \printbibliography{}
 \end{document}
