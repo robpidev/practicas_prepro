@@ -1,0 +1,241 @@
+\subsection{RELOJ COMPARADOR (Comparador de cuadrante)}
+\label{sec:reloj-comparador}
+
+\subsubsection{Modelo de medición y ley de propagación}
+
+La calibración de un reloj comparador por comparación directa con bloques patrón de
+longitud sobre una mesa de planitud de granito \parencite{inacal_pc014, cem_di010}
+consiste en leer la desviación que el palpador registra al sustituir la pieza por la
+pila de bloques. Sea $\bar{I}$ la indicación promedio del comparador y $L_{BP}$ la
+longitud de la pila corregida por certificado. El error de indicación corregido por
+efectos térmicos es
+
+\begin{equation}
+  E = \bar{I} - L_{BP} + \bar{I}\,\delta\alpha\,\Delta T_i
+      + L_{BP}\,\alpha_{BP}\,\delta T,
+  \label{eq:reloj-modelo}
+\end{equation}
+
+donde $\delta\alpha = \alpha_i - \alpha_{BP}$ es la diferencia entre los coeficientes
+de dilatación del instrumento y del bloque patrón, $\Delta T_i = T_i - T_0$ es la
+desviación de la temperatura del reloj respecto de la referencia
+$T_0 = 20\ ^\circ\text{C}$ y $\delta T = \Delta T_i - \Delta T_{BP}$ es la diferencia
+térmica entre ambos cuerpos. Los dos últimos términos son correctivos y de orden
+superior frente a $\bar{I} - L_{BP}$.
+
+De la ecuación~\eqref{eq:reloj-modelo} se observa que $E$ es una función diferenciable
+de seis variables de entrada,
+$E = f(\bar{I}; L_{BP}; \delta\alpha; \Delta T_i; \alpha_{BP}; \delta T)$, por lo que su
+varianza se obtiene aplicando la ley de propagación de la
+ecuación~\eqref{eq:error-std-values}. Como las variables son estadísticamente
+independientes, $\text{Cov}(x_i, x_j) = 0$ para $i \neq j$ y la suma se reduce a
+
+\begin{align}
+  \sigma_c^2(E) &=
+  \left( \ptij{E}{\bar{I}} \right)^2 \sigma^2(\bar{I}) +
+  \left( \ptij{E}{L_{BP}} \right)^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + \left( \ptij{E}{\delta\alpha} \right)^2 \sigma^2(\delta\alpha) +
+  \left( \ptij{E}{\Delta T_i} \right)^2 \sigma^2(\Delta T_i) \label{eq:reloj-gum} \\
+  &\quad + \left( \ptij{E}{\alpha_{BP}} \right)^2 \sigma^2(\alpha_{BP}) +
+  \left( \ptij{E}{\delta T} \right)^2 \sigma^2(\delta T). \nonumber
+\end{align}
+
+Evaluando las derivadas parciales de la función~\eqref{eq:reloj-modelo} respecto de
+cada variable de entrada:
+
+\begin{align}
+  \ptij{E}{\bar{I}} &= 1 + \delta\alpha \, \Delta T_i, &
+  \ptij{E}{L_{BP}} &= -1 + \alpha_{BP} \, \delta T, \nonumber \\
+  \ptij{E}{\delta\alpha} &= \bar{I} \, \Delta T_i, &
+  \ptij{E}{\Delta T_i} &= \bar{I} \, \delta\alpha, \label{eq:reloj-sens-deriv} \\
+  \ptij{E}{\alpha_{BP}} &= L_{BP} \, \delta T, &
+  \ptij{E}{\delta T} &= L_{BP} \, \alpha_{BP}. \nonumber
+\end{align}
+
+Sustituyendo los coeficientes~\eqref{eq:reloj-sens-deriv} en la
+ecuación~\eqref{eq:reloj-gum} se obtiene la varianza combinada del error de
+indicación:
+
+\begin{align}
+  \sigma_c^2(E) &=
+  [1 + \delta\alpha \, \Delta T_i]^2 \sigma^2(\bar{I}) +
+  [-1 + \alpha_{BP} \, \delta T]^2 \sigma^2(L_{BP}) \nonumber \\
+  &\quad + [\bar{I} \, \Delta T_i]^2 \sigma^2(\delta\alpha) +
+  [\bar{I} \, \delta\alpha]^2 \sigma^2(\Delta T_i) \label{eq:reloj-varianza} \\
+  &\quad + [L_{BP} \, \delta T]^2 \sigma^2(\alpha_{BP}) +
+  [L_{BP} \, \alpha_{BP}]^2 \sigma^2(\delta T). \nonumber
+\end{align}
+
+\subsubsection{Componentes de incertidumbre del error de indicación}
+
+Salvo la repetibilidad, que proviene de lecturas repetidas y constituye una evaluación
+tipo~A según la ecuación~\eqref{eq:sigma-media-experimental}, las componentes restantes
+son evaluaciones tipo~B: derivan de especificaciones del fabricante, del procedimiento
+de calibración o de fronteras acotadas conocidas. Para cada una de ellas, acotada en un
+intervalo de semiamplitud $a$, se aplica la distribución rectangular de la
+ecuación~\eqref{eq:sigma-rectangular}, es decir,
+
+\begin{equation}
+  \sigma = \sqrt{\int_{-a}^{a} (x - \bk{x})^2 P(x)\,dx} = \frac{a}{\sqrt{3}}.
+  \label{eq:reloj-rectangular}
+\end{equation}
+
+\subsubsection*{Repetibilidad de la indicación}
+
+Sea $I_p$ cada una de las $n = 5$ lecturas repetidas en el punto de mayor error
+nominal y $\bar{I}$ su media, conforme al procedimiento PC-014
+\parencite{inacal_pc014}. La dispersión experimental se estima con la desviación
+estándar muestral y la del promedio correspondiente según la
+ecuación~\eqref{eq:sigma-media-experimental}:
+
+\begin{equation}
+  \sigma(\bar{I}) = \frac{s_R}{\sqrt{n}},
+  \qquad
+  s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^{n} (I_p - \bar{I})^2}.
+  \label{eq:reloj-sigma-I}
+\end{equation}
+
+\subsubsection*{Bloque patrón de referencia}
+
+La longitud de la pila combina la incertidumbre del certificado de calibración con
+factor de cobertura $k = 2$ y la deriva dimensional máxima anual estipulada por la
+norma ISO~3650 \parencite{iso3650_1998}, esta última modelada mediante la distribución
+rectangular:
+
+\begin{equation}
+  \sigma^2(L_{BP}) = \left(\frac{U_{cal}}{k}\right)^2 + \frac{U_{der}^2}{3}.
+  \label{eq:reloj-sigma-LBP}
+\end{equation}
+
+\subsubsection*{Desalineamiento de coseno}
+
+Si el vástago del palpador se inclina un ángulo $\theta \le 1^\circ$ respecto de la
+normal del plano de trabajo \parencite{axiospec_dial, cem_di010}, la lectura sobre una
+longitud nominal $L$ se acorta en $\delta l_{cos} = L(1 - \cos\theta)$. Tomando esa
+desviación como semiamplitud del intervalo,
+
+\begin{equation}
+  \sigma(\delta l_{cos}) = \frac{L(1 - \cos\theta)}{2\sqrt{3}}.
+  \label{eq:reloj-sigma-cos}
+\end{equation}
+
+\subsubsection*{Resolución o división de escala}
+
+Sea $d$ la división de escala de la carátula o pantalla y $m$ el número de partes en
+que se subdivide por estimación visual \parencite{jcgm2008gum, axiospec_dial}. El
+límite de discriminación es $d/m$, de modo que, con semiamplitud $a = (d/m)/2$,
+
+\begin{equation}
+  \sigma(\delta l_{res}) = \frac{d/m}{2\sqrt{3}}.
+  \label{eq:reloj-sigma-res}
+\end{equation}
+
+\subsubsection*{Planitud de la mesa de soporte}
+
+Dada la tolerancia de planitud $t_{\parallel}$ reportada en el certificado de la mesa
+de granito \parencite{cem_di010}, y tomándola como ancho total del intervalo,
+
+\begin{equation}
+  \sigma(\delta l_{plan}) = \frac{t_{\parallel}}{2\sqrt{3}}.
+  \label{eq:reloj-sigma-plan}
+\end{equation}
+
+\subsubsection*{Deformación por fuerza del palpador}
+
+La deformación elástica de un contacto esfera-plano se estima con las relaciones de
+Hertz a partir de la fuerza de medida $P$ y del diámetro $D$ de la punta esférica
+\parencite{axiospec_dial},
+
+\begin{equation}
+  \delta l_{fuerza} = 2\times10^{-5}\, P^{2/3} D^{-1/3}
+  \quad\Longrightarrow\quad
+  \sigma(\delta l_{fuerza}) = \frac{\delta l_{fuerza}}{2\sqrt{3}}.
+  \label{eq:reloj-sigma-fuerza}
+\end{equation}
+
+\subsubsection*{Parámetros térmicos}
+
+Sean $\Delta\alpha_i$ y $\Delta\alpha_{BP}$ las semiamplitudes de tolerancia de los
+coeficientes de dilatación del instrumento y del bloque. Aplicando
+\eqref{eq:reloj-rectangular} a la diferencia $\delta\alpha$,
+
+\begin{equation}
+  \sigma^2(\delta\alpha) = \sigma^2(\alpha_i) + \sigma^2(\alpha_{BP})
+  = \frac{\Delta\alpha_i^2 + \Delta\alpha_{BP}^2}{3},
+  \qquad
+  \sigma^2(\alpha_{BP}) = \frac{\Delta\alpha_{BP}^2}{3}.
+  \label{eq:reloj-sigma-dalpha}
+\end{equation}
+
+Sean $UT_{cert}$ la exactitud del termómetro de contacto, $UT_{der}$ su deriva
+máxima, $d_T/m_T$ su límite de discriminación y $\Delta t_A$ la fluctuación observada
+durante el ensayo. Combinando las contribuciones independientes con
+\eqref{eq:reloj-rectangular},
+
+\begin{equation}
+  \sigma^2(\Delta T_i) = \left(\frac{UT_{cert}}{k}\right)^2
+  + \left(\frac{d_T/m_T}{\sqrt{3}}\right)^2
+  + \frac{UT_{der}^2}{3} + \frac{\Delta t_A^2}{3}.
+  \label{eq:reloj-sigma-deltaT}
+\end{equation}
+
+De manera análoga, para el gradiente térmico $\delta T$ entre bloque y reloj se define
+$\Delta t = \max(\Delta t_1, \Delta t_2)$ como la máxima diferencia térmica entre ambos
+cuerpos, de modo que
+
+\begin{equation}
+  \sigma^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2
+  + \frac{\Delta t^2}{3}
+  + \left(\frac{d_T/m_T}{\sqrt{3}}\right)^2
+  + \frac{UT_{der}^2}{3}.
+  \label{eq:reloj-sigma-deltaT-grad}
+\end{equation}
+
+\subsubsection*{Varianza combinada de la indicación}
+
+Asumiendo independencia entre las componentes evaluadas, la varianza total de la
+indicación es la suma en cuadratura de las
+ecuaciones~\eqref{eq:reloj-sigma-I} a~\eqref{eq:reloj-sigma-fuerza}:
+
+\begin{equation}
+  \sigma^2(\bar{I}) = \frac{s_R^2}{n}
+  + \sigma^2(\delta l_{cos}) + \sigma^2(\delta l_{res})
+  + \sigma^2(\delta l_{plan}) + \sigma^2(\delta l_{fuerza}).
+  \label{eq:reloj-sigma-I-total}
+\end{equation}
+
+\subsubsection{Incertidumbre expandida analítica}
+
+Sustituyendo \eqref{eq:reloj-sigma-I-total} y las
+ecuaciones~\eqref{eq:reloj-sigma-LBP} y~\eqref{eq:reloj-sigma-dalpha}
+a~\eqref{eq:reloj-sigma-deltaT-grad} en la ley de
+propagación~\eqref{eq:reloj-varianza}, la incertidumbre expandida del error de
+indicación queda, con factor de cobertura $k$, como
+
+\begin{align}
+  U(E) = k \, \Bigg\{ &
+  \left[1 + \delta\alpha \, \Delta T_i\right]^2
+  \Bigg[ \frac{s_R^2}{n}
+    + \left(\frac{L(1-\cos\theta)}{2\sqrt{3}}\right)^2
+    + \left(\frac{d/m}{2\sqrt{3}}\right)^2 \nonumber \\
+  &\qquad\qquad
+    + \left(\frac{t_{\parallel}}{2\sqrt{3}}\right)^2
+    + \left(\frac{\delta l_{fuerza}}{2\sqrt{3}}\right)^2 \Bigg] \nonumber \\
+  &\quad + \left[-1 + \alpha_{BP} \, \delta T\right]^2
+    \left[ \left(\frac{U_{cal}}{k}\right)^2 + \frac{U_{der}^2}{3} \right]
+    \nonumber \\
+  &\quad + \left[\bar{I} \, \Delta T_i\right]^2
+    \left[ \frac{\Delta\alpha_i^2 + \Delta\alpha_{BP}^2}{3} \right]
+    + \left[\bar{I} \, \delta\alpha\right]^2 \sigma^2(\Delta T_i) \nonumber \\
+  &\quad + \left[L_{BP} \, \delta T\right]^2
+    \frac{\Delta\alpha_{BP}^2}{3}
+    + \left[L_{BP} \, \alpha_{BP}\right]^2 \sigma^2(\delta T)
+  \Bigg\}^{1/2}.
+  \label{eq:reloj-U}
+\end{align}
+
+Adoptando $k = 2$, correspondiente a un nivel de confianza bilateral aproximado del
+$95$\,\% \parencite{jcgm2008gum, inacal_pc014}, la
+ecuación~\eqref{eq:reloj-U} queda completamente determinada por las componentes
+anteriores y permite evaluar $U(E)$ punto a punto a lo largo del alcance del
+instrumento.
