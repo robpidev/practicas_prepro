@@ -456,9 +456,40 @@ Aplicando \eqref{eq:incertidumbre-expandida} con $k = 2$,
   \label{eq:reloj-U-num-valor}
 \end{equation}
 
-Sobre los diez puntos de la serie, la incertidumbre expandida se mantiene entre
-$3.21$ y $3.33\ \mu\text{m}$. La Figura~\ref{fig:reloj-error-U} muestra los errores de
-indicación de la Tabla~\ref{tab:reloj-ascenso} junto con sus barras de incertidumbre.
+Al desaparecer del modelo los términos que llevan $\delta\alpha$ y $\delta T$ como
+factor, la varianza combinada conserva únicamente la dependencia explícita de la
+longitud $L$ procedente del desalineamiento de coseno y de los dos términos térmicos de
+la ecuación~\eqref{eq:reloj-varianza}. Agrupando las componentes independientes del
+punto, con $\bar I \approx L$ y $\Delta T_i \approx 1.5\ ^\circ\text{C}$ en los
+términos correctivos,
+
+\begin{equation}
+  \begin{aligned}
+    \sigma_c^2(E,L) &=
+    \underbrace{0.140 + 0.0044 + 0.3333 + 2.0833 + 0.0118}_{2.573\ \mu\text{m}^2}
+    \\[4pt]
+    &\quad + \underbrace{\left[\frac{(1-\cos\theta)\,10^3}{2\sqrt{3}}\right]^2
+      + \left[10^3\,\Delta T_i\,\sigma(\delta\alpha)\right]^2
+      + \left[10^3\,\alpha_{BP}\,\sigma(\delta T)\right]^2}
+      _{1.979\times10^{-3}\ \mu\text{m}^2/\text{mm}^2}\,L^2 .
+  \end{aligned}
+  \label{eq:reloj-sigma-c-L}
+\end{equation}
+
+Aplicando $k = 2$ \parencite{jcgm2008gum, inacal_pc014}, se obtiene la forma cerrada
+
+\begin{equation}
+  U(E,L) = \sqrt{10.29 + 7.91\times10^{-3}\,L^2}\ \mu\text{m},
+  \label{eq:reloj-U-vecL}
+\end{equation}
+
+con $L$ expresada en milímetros. El coeficiente del término cuadrático reúne el
+desalineamiento y las dos contribuciones térmicas: en el extremo del alcance ensayado
+($L = 10$ mm) aporta $0.198\ \mu\text{m}^2$ frente a los $2.573\ \mu\text{m}^2$ del
+término independiente. En consecuencia $U(E)$ crece suavemente de $3.21$ a
+$3.33\ \mu\text{m}$ entre $1$ y $10$ mm. La Figura~\ref{fig:reloj-error-U} muestra los
+errores de indicación de la Tabla~\ref{tab:reloj-ascenso} junto con sus barras de
+incertidumbre.
 
 \begin{figure}[H]
 \centering
