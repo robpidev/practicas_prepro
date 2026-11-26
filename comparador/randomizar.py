@@ -1,8 +1,8 @@
 """Randomiza la indicación del comparador y, opcionalmente, la temperatura.
 
-La indicación se genera como VP + U(0.000, 0.005) mm, es decir, un desvío
-de 0 a 5 µm respecto del valor patrón. La temperatura se sortea en
-U(21.3, 21.5) °C solo si se pasa --temp; por defecto se conserva.
+La indicación se genera como VP + {0.00, 0.01, 0.02} mm, es decir, un desvío
+de dos decimales de hasta 20 µm respecto del valor patrón. La temperatura se
+sortea en U(21.3, 21.5) °C solo si se pasa --temp; por defecto se conserva.
 """
 
 import argparse
@@ -23,11 +23,11 @@ def main(seed: int | None = None, temp: bool = False) -> None:
     df = pd.read_csv(CSV)
 
     vp = df[VP].to_numpy(dtype=float)
-    desvio = rng.uniform(0.000, 0.005, size=len(df))
+    desvio = rng.integers(0, 3, size=len(df)) / 100.0
 
     df[BU] = df[BU].astype(int)
     df[VP] = [f"{x:.3f}" for x in vp]
-    df[IND] = [f"{x:.3f}" for x in vp + desvio]
+    df[IND] = [f"{x:.2f}" for x in vp + desvio]
 
     if temp:
         temperatura = rng.uniform(21.3, 21.5, size=len(df))

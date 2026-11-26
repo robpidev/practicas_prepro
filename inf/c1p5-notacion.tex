@@ -1,0 +1,69 @@
+\subsubsection{Simbología y correspondencia con las normas}
+\label{sec:simbologia}
+
+La Tabla~\ref{tab:simbologia} recoge los símbolos empleados en el informe y su
+equivalencia con la notación de la GUM y de los procedimientos de calibración del
+INACAL. En 3.1, $\sigma$ denota la desviación estándar poblacional de una variable
+aleatoria; en las secciones de calibración, $u$ denota la incertidumbre estándar.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\caption{Simbología del informe y correspondencia con la GUM y el INACAL.}
+\label{tab:simbologia}
+\begin{tabular}{@{}p{2.5cm}p{7.3cm}p{1.3cm}p{4.1cm}@{}}
+\toprule
+Símbolo & Significado & Unidad & Equivalencia \\
+\midrule
+\multicolumn{4}{l}{\textit{Estadística}} \\
+$x_i$ & observación individual & --- & --- \\
+$\bar{x}$ & media muestral & --- & GUM 4.2 \\
+$s$ & desviación estándar experimental & --- & GUM 4.2 \\
+$s/\sqrt{n}$ & incertidumbre de la media & --- & $u_A$ (GUM 4.2) \\
+$n$ & número de observaciones & --- & --- \\
+$\sigma$ & desviación estándar poblacional & --- & --- \\
+$a$ & semiamplitud de un intervalo & --- & GUM 4.3 \\
+\midrule
+\multicolumn{4}{l}{\textit{Incertidumbre}} \\
+$u$ & incertidumbre estándar & --- & GUM 2.3 \\
+$u_A$ & componente tipo~A & --- & GUM 4.2 \\
+$u_B$ & componente tipo~B & --- & GUM 4.3 \\
+$u_c$ & incertidumbre estándar combinada & --- & GUM 5 \\
+$U$ & incertidumbre expandida & --- & GUM 6 \\
+$k$ & factor de cobertura & --- & GUM 6 \\
+\midrule
+\multicolumn{4}{l}{\textit{Calibración dimensional}} \\
+$I$, $I_k$ & indicación del instrumento & mm & $L_i$ (PC-012, PC-014) \\
+$L_i$ & indicación del instrumento en la notación PC-012 & mm & equivale a $I$ \\
+$X_j$ & lectura en la posición $j$ (superior, central, inferior) & mm & PC-012 \\
+$D_j$ & diferencia entre la lectura $j$ y el valor patrón corregido & µm & PC-012 \\
+$PC$ & promedio corregido de las lecturas & mm & PC-012 \\
+$S_{E-I}$, $S_{E-P}$ & error por cambio de escala exteriores-interiores y exteriores-profundidad & µm & PC-012 \\
+$VP$ & valor patrón & mm & PC-012, PC-014 \\
+$VPC$ & valor patrón corregido & mm & PC-012 \\
+$E$ & error de indicación & µm & PC-012, PC-014 \\
+$E_{corr}$ & error de indicación corregido & µm & PC-012, PC-014 \\
+$f_e$ & alcance del error de indicación & µm & PC-012 \\
+$R$ & rango de repeticiones & µm & PC-012 \\
+$f_w$ & alcance de repetibilidad & µm & PC-012 \\
+$s_R$ & desviación estándar de las repeticiones & µm & GUM 4.2 \\
+$d$ & división de escala & mm & PC-012 \\
+$m$ & subdivisiones de la escala & --- & PC-012 \\
+$r = d/m$ & resolución & mm & PC-012 \\
+$L_{BP}$ & longitud del bloque patrón & mm & PC-014 \\
+$U_{cal}$ & incertidumbre del certificado & µm & GUM 4.3 \\
+$U_{der}$ & deriva del patrón & µm & ISO 3650 \\
+$\alpha$ & coeficiente de dilatación & °C$^{-1}$ & PC-012, PC-014 \\
+$\Delta T$ & desviación de temperatura & °C & PC-012, PC-014 \\
+$t_\parallel$ & tolerancia de planitud & µm & PC-014 \\
+\midrule
+\multicolumn{4}{l}{\textit{Ultrasonido}} \\
+$e$ & espesor medido & mm & PC-029 \\
+$c_L$ & velocidad longitudinal & m/s & PC-029 \\
+$\Delta t$ & tiempo de vuelo & s & PC-029 \\
+$V_{PE}$ & valor del patrón escalonado & mm & PC-029 \\
+$r$ & resolución del display & mm & PC-029 \\
+\bottomrule
+\end{tabular}
+\end{table}

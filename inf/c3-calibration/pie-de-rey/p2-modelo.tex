@@ -102,8 +102,8 @@ ecuación~\eqref{eq:error-std-values}. Como las variables $x_j$ son estadística
 independientes, $\text{Cov}(x_i, x_j) = 0$ para $i \neq j$ y la suma se reduce a
 
 \begin{equation}
-  \sigma_c^2(E) = \sum_{j=1}^6 \left. \left( \frac{\partial f}{\partial x_j}
-  \right) \right|_{\vec{\mu}}^2 \sigma^2(x_j),
+  u_c^2(E) = \sum_{j=1}^6 \left. \left( \frac{\partial f}{\partial x_j}
+  \right) \right|_{\vec{\mu}}^2 u^2(x_j),
   \label{eq:gum}
 \end{equation}
 
@@ -113,13 +113,13 @@ la sumatoria~\eqref{eq:gum} sobre las seis variables de entrada del
 modelo~\eqref{eq:e-func}:
 
 \begin{align}
-  \sigma_c^2(E) &=
-  \left( \ptij{E}{L_i} \right)^2 \sigma^2(L_i) +
-  \left( \ptij{E}{L_{BP}} \right)^2 \sigma^2(L_{BP}) \nonumber \\
-  &\quad + \left( \ptij{E}{\delta\alpha} \right)^2 \sigma^2(\delta\alpha) +
-  \left( \ptij{E}{\Delta T_i} \right)^2 \sigma^2(\Delta T_i) \label{eq:gum-expanded} \\
-  &\quad + \left( \ptij{E}{\alpha_{BP}} \right)^2 \sigma^2(\alpha_{BP}) +
-  \left( \ptij{E}{\delta T} \right)^2 \sigma^2(\delta T). \nonumber
+  u_c^2(E) &=
+  \left( \ptij{E}{L_i} \right)^2 u^2(L_i) +
+  \left( \ptij{E}{L_{BP}} \right)^2 u^2(L_{BP}) \nonumber \\
+  &\quad + \left( \ptij{E}{\delta\alpha} \right)^2 u^2(\delta\alpha) +
+  \left( \ptij{E}{\Delta T_i} \right)^2 u^2(\Delta T_i) \label{eq:gum-expanded} \\
+  &\quad + \left( \ptij{E}{\alpha_{BP}} \right)^2 u^2(\alpha_{BP}) +
+  \left( \ptij{E}{\delta T} \right)^2 u^2(\delta T). \nonumber
 \end{align}
 
 Evaluando las derivadas parciales de la función~\eqref{eq:e-model} respecto a cada
@@ -139,11 +139,11 @@ ecuación~\eqref{eq:gum-expanded} se obtiene la ecuación final para la varianza
 combinada del error de indicación:
 
 \begin{align}
-  \sigma_c^2(E) &=
-  [1 + \delta\alpha \, \Delta T_i]^2 \sigma^2(L_i) +
-  [-1 + \alpha_{BP} \, \delta T]^2 \sigma^2(L_{BP}) \nonumber \\
-  &\quad + [L_i \, \Delta T_i]^2 \sigma^2(\delta\alpha) +
-  [L_i \, \delta\alpha]^2 \sigma^2(\Delta T_i) \label{eq:sigma-final} \\
-  &\quad + [L_{BP} \, \delta T]^2 \sigma^2(\alpha_{BP}) +
-  [L_{BP} \, \alpha_{BP}]^2 \sigma^2(\delta T). \nonumber
+  u_c^2(E) &=
+  [1 + \delta\alpha \, \Delta T_i]^2 u^2(L_i) +
+  [-1 + \alpha_{BP} \, \delta T]^2 u^2(L_{BP}) \nonumber \\
+  &\quad + [L_i \, \Delta T_i]^2 u^2(\delta\alpha) +
+  [L_i \, \delta\alpha]^2 u^2(\Delta T_i) \label{eq:sigma-final} \\
+  &\quad + [L_{BP} \, \delta T]^2 u^2(\alpha_{BP}) +
+  [L_{BP} \, \alpha_{BP}]^2 u^2(\delta T). \nonumber
 \end{align}

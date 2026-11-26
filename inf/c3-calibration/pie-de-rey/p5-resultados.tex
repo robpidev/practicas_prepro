@@ -13,15 +13,15 @@ Conforme a la ecuación~\eqref{eq:sigma-Li-total}, la varianza combinada de la
 indicación es la suma en cuadratura de las siete contribuciones evaluadas:
 
 \begin{equation}
-    \sigma^2(L_i) = \sigma^2(L_{i_E}) + \sigma^2(L_{i_R}) + \sigma^2(L_{i_S})
-    + \sigma^2(L_{i_L}) + \sigma^2(L_{i_J}) + \sigma^2(L_{i_K}) + \sigma^2(L_{i_r}),
+    u^2(L_i) = u^2(L_{i_E}) + u^2(L_{i_R}) + u^2(L_{i_S})
+    + u^2(L_{i_L}) + u^2(L_{i_J}) + u^2(L_{i_K}) + u^2(L_{i_r}),
     \label{eq:sigma-Li-simbolico}
 \end{equation}
 
 es decir
 
 \begin{equation}
-    \sigma^2(L_i) =
+    u^2(L_i) =
     \begin{aligned}
         &\left(\frac{E}{2\sqrt{3}}\right)^2
         + \left(\frac{s_R}{\sqrt{n}}\right)^2
@@ -37,13 +37,13 @@ es decir
 Sustituyendo cada componente por su valor calculado,
 
 \begin{equation}
-    \sigma^2(L_i) = \left[(14.43)^2 + (12.25)^2 + (9.62)^2 + (2.89)^2
+    u^2(L_i) = \left[(14.43)^2 + (12.25)^2 + (9.62)^2 + (2.89)^2
     + 0 + 0 + (14.43)^2\right]\ \mu\text{m}^2,
     \label{eq:sigma-Li-num}
 \end{equation}
 
 \begin{equation}
-    \therefore\quad \sigma(L_i) = \sqrt{667.59}\ \mu\text{m}
+    \therefore\quad u(L_i) = \sqrt{667.59}\ \mu\text{m}
     \approx 25.84\ \mu\text{m}.
     \label{eq:sigma-Li-num-valor}
 \end{equation}
@@ -54,14 +54,14 @@ ecuación~\eqref{eq:sigma-cuad-expandida} con esos valores, los coeficientes
 $[1+\delta\alpha\,\Delta T_i]^2$ y $[-1+\alpha_{BP}\,\delta T]^2$ toman el valor
 unidad, mientras que los términos $[L_i\,\delta\alpha]^2$ y
 $[L_{BP}\,\delta T]^2$ se anulan. Los dos restantes, asociados a
-$\sigma^2(\delta\alpha)$ y a $\sigma^2(\alpha_{BP})$, no se anulan pero resultan
+$u^2(\delta\alpha)$ y a $u^2(\alpha_{BP})$, no se anulan pero resultan
 despreciables: el primero vale $9.4\times10^{-8}\ \mu\text{m}^2$ en el extremo del
 alcance (ecuación~\eqref{eq:termino-termico}) y el segundo es de orden
 $10^{-9}\ \mu\text{m}^2$ (ecuación~\eqref{eq:termino-termico-2}), frente a
-$\sigma^2(L_i) = 667.6\ \mu\text{m}^2$. Con esa aproximación,
+$u^2(L_i) = 667.6\ \mu\text{m}^2$. Con esa aproximación,
 
 \begin{equation}
-    \therefore\quad \sigma_c^2(E) \approx \sigma^2(L_i) + \sigma^2(L_{BP}).
+    \therefore\quad u_c^2(E) \approx u^2(L_i) + u^2(L_{BP}).
     \label{eq:sigma-c-num}
 \end{equation}
 
@@ -86,7 +86,7 @@ Sustituyendo el valor~\eqref{eq:sigma-LBP-total-valor} en la
 ecuación~\eqref{eq:sigma-c-num},
 
 \begin{equation}
-    \sigma_c(E) = \sqrt{25.84^2 + 0.126^2}\ \mu\text{m}
+    u_c(E) = \sqrt{25.84^2 + 0.126^2}\ \mu\text{m}
     \approx 25.84\ \mu\text{m},
     \label{eq:sigma-c-num-valor}
 \end{equation}
@@ -128,11 +128,11 @@ Sustituyendo los valores de este ensayo,
 \end{equation}
 
 Los cinco errores de indicación de la Tabla~\ref{tab:pie-rey-vpc} se comparan con
-ambos umbrales en la Tabla~\ref{tab:pie-rey-conformidad}: tres de los cinco puntos
-caen holgadamente dentro de la banda de aceptación, mientras que los de $150$ mm
-($+28.2\ \mu\text{m}$) y $200$ mm ($+26.4\ \mu\text{m}$) se sitúan en el entorno del
-umbral, donde el error permanece dentro de tolerancia pero la incertidumbre del
-método impide afirmar conformidad sin riesgo.
+ambos umbrales en la Tabla~\ref{tab:pie-rey-conformidad}: tres puntos caen
+holgadamente dentro de la banda de aceptación, el de $200$ mm
+($+26.4\ \mu\text{m}$) apenas dentro y el de $150$ mm ($+28.2\ \mu\text{m}$) en la
+zona de incertidumbre, donde el error permanece dentro de tolerancia pero la
+incertidumbre del método impide afirmar conformidad sin riesgo.
 
 \begin{table}[H]
 \centering

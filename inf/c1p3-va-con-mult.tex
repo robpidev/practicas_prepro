@@ -95,6 +95,28 @@ Extrayendo la raíz cuadrada, la desviación estándar de la distribución recta
 
 donde $a$ es la semiamplitud del intervalo y $\Delta = 2a$ su ancho total.
 
+\paragraph{Distribuciones triangular y normal}
+
+En una evaluación tipo~B la distribución se elige según la información
+disponible. Si los valores son más probables cerca del centro del intervalo, se
+usa la distribución triangular,
+
+\begin{equation}
+    \sigma = \frac{a}{\sqrt{6}}.
+    \label{eq:sigma-triangular}
+\end{equation}
+
+Si la componente proviene de un certificado que declara una incertidumbre
+expandida $U$ con factor de cobertura $k$, se usa la distribución normal,
+
+\begin{equation}
+    \sigma = \frac{U}{k},
+    \label{eq:sigma-normal}
+\end{equation}
+
+con $k=2$ para un nivel de confianza aproximado del $95$\,\%
+\parencite{jcgm2008gum}.
+
 De manera análoga a la función delta de Kroneker se define
 la función delta $\delta_\epsilon(x)$ como sigue
 

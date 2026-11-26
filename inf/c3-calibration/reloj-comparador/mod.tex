@@ -39,8 +39,10 @@ $\delta T$ & Gradiente térmico entre bloque e instrumento
 
 Se ensaya el intervalo de $1$ a $10$ mm formando la pila de bloques patrón por
 acumulación, con un punto de calibración por milímetro. En cada punto se registran el
-valor patrón $VP$, la indicación del comparador $I$ y la temperatura del bloque $T$. El
-error de indicación elemental se calcula como
+valor patrón $VP$, la indicación del comparador $I$ y la temperatura del bloque $T$. La
+temperatura inicial del ensayo es de $21.3\ ^\circ\text{C}$ y la final de
+$21.5\ ^\circ\text{C}$, que son respectivamente el mínimo y el máximo registrados en la
+serie. El error de indicación elemental se calcula como
 
 \begin{equation}
     E_k = (I_k - VP_k)\times 1000\ \mu\text{m},
@@ -55,9 +57,31 @@ El alcance del instrumento en ascenso se define como la diferencia entre el erro
 máximo y el mínimo de la serie:
 
 \begin{equation}
-    f_e = E_{\max} - E_{\min} = 5 - 0 = 5\ \mu\text{m}.
+    f_e = E_{\max} - E_{\min} = 20 - 0 = 20\ \mu\text{m}.
     \label{eq:reloj-fe}
 \end{equation}
+
+\subsubsection{Cálculo estadístico elemental}
+\label{sec:reloj-estadistica}
+
+Antes de introducir correcciones se calcula la estadística directa de las mediciones.
+Como en cada punto de calibración se dispone de una sola lectura, el análisis se aplica
+a la serie completa de diez errores y, por separado, a las cinco repeticiones del punto
+de $7$ mm. Sea $E_k$ el error de indicación de la
+ecuación~\eqref{eq:reloj-E-simple}; su media y su desviación estándar muestral son
+
+\begin{equation}
+  \bar E = \frac{1}{10}\sum_{k=1}^{10} E_k,
+  \qquad
+  s_E = \sqrt{\frac{1}{9}\sum_{k=1}^{10}\left(E_k - \bar E\right)^2},
+  \label{eq:reloj-estadistica-serie}
+\end{equation}
+
+y el alcance de la serie sigue la definición de la
+ecuación~\eqref{eq:reloj-fe}. La Tabla~\ref{tab:reloj-estadistica} recoge los valores
+numéricos de la serie y de las cinco repeticiones.
+
+\input{c3-calibration/reloj-comparador/tablas/t6.tex}
 
 \subsubsection{Modelo de medición y ley de propagación}
 
@@ -89,13 +113,13 @@ ecuación~\eqref{eq:error-std-values}. Como las variables son estadísticamente
 independientes, $\text{Cov}(x_i, x_j) = 0$ para $i \neq j$ y la suma se reduce a
 
 \begin{align}
-  \sigma_c^2(E) &=
-  \left( \ptij{E}{\bar{I}} \right)^2 \sigma^2(\bar{I}) +
-  \left( \ptij{E}{L_{BP}} \right)^2 \sigma^2(L_{BP}) \nonumber \\
-  &\quad + \left( \ptij{E}{\delta\alpha} \right)^2 \sigma^2(\delta\alpha) +
-  \left( \ptij{E}{\Delta T_i} \right)^2 \sigma^2(\Delta T_i) \label{eq:reloj-gum} \\
-  &\quad + \left( \ptij{E}{\alpha_{BP}} \right)^2 \sigma^2(\alpha_{BP}) +
-  \left( \ptij{E}{\delta T} \right)^2 \sigma^2(\delta T). \nonumber
+  u_c^2(E) &=
+  \left( \ptij{E}{\bar{I}} \right)^2 u^2(\bar{I}) +
+  \left( \ptij{E}{L_{BP}} \right)^2 u^2(L_{BP}) \nonumber \\
+  &\quad + \left( \ptij{E}{\delta\alpha} \right)^2 u^2(\delta\alpha) +
+  \left( \ptij{E}{\Delta T_i} \right)^2 u^2(\Delta T_i) \label{eq:reloj-gum} \\
+  &\quad + \left( \ptij{E}{\alpha_{BP}} \right)^2 u^2(\alpha_{BP}) +
+  \left( \ptij{E}{\delta T} \right)^2 u^2(\delta T). \nonumber
 \end{align}
 
 Evaluando las derivadas parciales de la función~\eqref{eq:reloj-modelo} respecto de
@@ -115,13 +139,13 @@ ecuación~\eqref{eq:reloj-gum} se obtiene la varianza combinada del error de
 indicación:
 
 \begin{align}
-  \sigma_c^2(E) &=
-  [1 + \delta\alpha \, \Delta T_i]^2 \sigma^2(\bar{I}) +
-  [-1 + \alpha_{BP} \, \delta T]^2 \sigma^2(L_{BP}) \nonumber \\
-  &\quad + [\bar{I} \, \Delta T_i]^2 \sigma^2(\delta\alpha) +
-  [\bar{I} \, \delta\alpha]^2 \sigma^2(\Delta T_i) \label{eq:reloj-varianza} \\
-  &\quad + [L_{BP} \, \delta T]^2 \sigma^2(\alpha_{BP}) +
-  [L_{BP} \, \alpha_{BP}]^2 \sigma^2(\delta T). \nonumber
+  u_c^2(E) &=
+  [1 + \delta\alpha \, \Delta T_i]^2 u^2(\bar{I}) +
+  [-1 + \alpha_{BP} \, \delta T]^2 u^2(L_{BP}) \nonumber \\
+  &\quad + [\bar{I} \, \Delta T_i]^2 u^2(\delta\alpha) +
+  [\bar{I} \, \delta\alpha]^2 u^2(\Delta T_i) \label{eq:reloj-varianza} \\
+  &\quad + [L_{BP} \, \delta T]^2 u^2(\alpha_{BP}) +
+  [L_{BP} \, \alpha_{BP}]^2 u^2(\delta T). \nonumber
 \end{align}
 
 \subsubsection{Componentes de incertidumbre del error de indicación}
@@ -134,7 +158,7 @@ intervalo de semiamplitud $a$, se aplica la distribución rectangular de la
 ecuación~\eqref{eq:sigma-rectangular}, es decir,
 
 \begin{equation}
-  \sigma = \sqrt{\int_{-a}^{a} (x - \bk{x})^2 P(x)\,dx} = \frac{a}{\sqrt{3}}.
+  u = \sqrt{\int_{-a}^{a} (x - \bk{x})^2 P(x)\,dx} = \frac{a}{\sqrt{3}}.
   \label{eq:reloj-rectangular}
 \end{equation}
 
@@ -147,7 +171,7 @@ estándar muestral y la del promedio correspondiente según la
 ecuación~\eqref{eq:sigma-media-experimental}:
 
 \begin{equation}
-  \sigma(\bar{I}) = \frac{s_R}{\sqrt{n}},
+  u(\bar{I}) = \frac{s_R}{\sqrt{n}},
   \qquad
   s_R = \sqrt{\frac{1}{n-1} \sum_{p=1}^{n} (I_p - \bar{I})^2}.
   \label{eq:reloj-sigma-I}
@@ -155,17 +179,10 @@ ecuación~\eqref{eq:sigma-media-experimental}:
 
 \input{c3-calibration/reloj-comparador/tablas/t2.tex}
 
-Con las cinco lecturas de la Tabla~\ref{tab:reloj-repetibilidad} se obtiene
-$\bar I = 7.0052$ mm y $s_R = 0.84\ \mu\text{m}$, de modo que
-
-\begin{equation}
-    \sigma(\bar I) = \frac{0.84}{\sqrt{5}}\ \mu\text{m}
-    \approx 0.37\ \mu\text{m}.
-    \label{eq:reloj-sigma-I-valor}
-\end{equation}
-
-El alcance de repetibilidad es
-$f_w = E_{\max} - E_{\min} = 6 - 4 = 2\ \mu\text{m}$.
+Los valores numéricos de $\bar I$, $s_R$, $u(\bar I)$ y del alcance de
+repetibilidad $f_w$, obtenidos de las cinco lecturas de la
+Tabla~\ref{tab:reloj-repetibilidad}, se recogen en la
+Tabla~\ref{tab:reloj-estadistica}.
 
 \subsubsection{Error corregido térmicamente}
 
@@ -182,10 +199,10 @@ anulan y el error corregido queda
 \end{equation}
 
 La Tabla~\ref{tab:reloj-correccion} compara ambos errores en los diez puntos: la
-corrección máxima es de $0.0001\ \mu\text{m}$, irrelevante frente a la incertidumbre
+corrección máxima es de $0.0003\ \mu\text{m}$, irrelevante frente a la incertidumbre
 del método.
 
-\input{c3-calibration/reloj-comparador/tablas/t3.tex}
+\input{c3-calibration/reloj-comparador/tablas/t4.tex}
 
 \subsubsection*{Bloque patrón de referencia}
 
@@ -195,7 +212,7 @@ norma ISO~3650 \parencite{iso3650_1998}, esta última modelada mediante la distr
 rectangular:
 
 \begin{equation}
-  \sigma^2(L_{BP}) = \left(\frac{U_{cal}}{k}\right)^2 + \frac{U_{der}^2}{3}.
+  u^2(L_{BP}) = \left(\frac{U_{cal}}{k}\right)^2 + \frac{U_{der}^2}{3}.
   \label{eq:reloj-sigma-LBP}
 \end{equation}
 
@@ -203,7 +220,7 @@ Con $U_{cal} = 0.12\ \mu\text{m}$ ($k = 2$) y
 $U_{der} = 0.05 + 0.5\times10^{-6}L\ \mu\text{m}$, en el punto de $10$ mm resulta
 
 \begin{equation}
-  \sigma(L_{BP}) = \sqrt{\left(\frac{0.12}{2}\right)^2 + \frac{0.050^2}{3}}\ \mu\text{m}
+  u(L_{BP}) = \sqrt{\left(\frac{0.12}{2}\right)^2 + \frac{0.050^2}{3}}\ \mu\text{m}
   \approx 0.067\ \mu\text{m}.
   \label{eq:reloj-sigma-LBP-valor}
 \end{equation}
@@ -216,14 +233,14 @@ longitud nominal $L$ se acorta en $\delta l_{cos} = L(1 - \cos\theta)$. Tomando 
 desviación como semiamplitud del intervalo,
 
 \begin{equation}
-  \sigma(\delta l_{cos}) = \frac{L(1 - \cos\theta)}{2\sqrt{3}}.
+  u(\delta l_{cos}) = \frac{L(1 - \cos\theta)}{2\sqrt{3}}.
   \label{eq:reloj-sigma-cos}
 \end{equation}
 
 Para $\theta = 1^\circ$, en el extremo del alcance ensayado ($L = 10$ mm),
 
 \begin{equation}
-  \sigma(\delta l_{cos}) =
+  u(\delta l_{cos}) =
   \frac{10(1-\cos 1^\circ)\times1000}{2\sqrt{3}}\ \mu\text{m}
   \approx 0.440\ \mu\text{m}.
   \label{eq:reloj-sigma-cos-valor}
@@ -236,14 +253,14 @@ que se subdivide por estimación visual \parencite{jcgm2008gum, axiospec_dial}. 
 límite de discriminación es $d/m$, de modo que, con semiamplitud $a = (d/m)/2$,
 
 \begin{equation}
-  \sigma(\delta l_{res}) = \frac{d/m}{2\sqrt{3}}.
+  u(\delta l_{res}) = \frac{d/m}{2\sqrt{3}}.
   \label{eq:reloj-sigma-res}
 \end{equation}
 
 Con $d = 0.01$ mm y $m = 5$ partes de estimación visual,
 
 \begin{equation}
-  \sigma(\delta l_{res}) =
+  u(\delta l_{res}) =
   \frac{0.01/5}{2\sqrt{3}}\ \text{mm}
   \approx 0.577\ \mu\text{m}.
   \label{eq:reloj-sigma-res-valor}
@@ -255,14 +272,14 @@ Dada la tolerancia de planitud $t_{\parallel}$ reportada en el certificado de la
 de granito \parencite{cem_di010}, y tomándola como ancho total del intervalo,
 
 \begin{equation}
-  \sigma(\delta l_{plan}) = \frac{t_{\parallel}}{2\sqrt{3}}.
+  u(\delta l_{plan}) = \frac{t_{\parallel}}{2\sqrt{3}}.
   \label{eq:reloj-sigma-plan}
 \end{equation}
 
 Con $t_{\parallel} = 5\ \mu\text{m}$,
 
 \begin{equation}
-  \sigma(\delta l_{plan}) =
+  u(\delta l_{plan}) =
   \frac{5}{2\sqrt{3}}\ \mu\text{m}
   \approx 1.443\ \mu\text{m}.
   \label{eq:reloj-sigma-plan-valor}
@@ -277,7 +294,7 @@ Hertz a partir de la fuerza de medida $P$ y del diámetro $D$ de la punta esfér
 \begin{equation}
   \delta l_{fuerza} = 2\times10^{-5}\, P^{2/3} D^{-1/3}
   \quad\Longrightarrow\quad
-  \sigma(\delta l_{fuerza}) = \frac{\delta l_{fuerza}}{2\sqrt{3}}.
+  u(\delta l_{fuerza}) = \frac{\delta l_{fuerza}}{2\sqrt{3}}.
   \label{eq:reloj-sigma-fuerza}
 \end{equation}
 
@@ -285,7 +302,7 @@ Con $P = 100$ gf y $D = 1.5$ mm (expresión en mm, $P$ en gf y $D$ en mm),
 $\delta l_{fuerza} = 0.376\ \mu\text{m}$ y por tanto
 
 \begin{equation}
-  \sigma(\delta l_{fuerza}) =
+  u(\delta l_{fuerza}) =
   \frac{0.376}{2\sqrt{3}}\ \mu\text{m}
   \approx 0.109\ \mu\text{m}.
   \label{eq:reloj-sigma-fuerza-valor}
@@ -298,10 +315,10 @@ coeficientes de dilatación del instrumento y del bloque. Aplicando
 \eqref{eq:reloj-rectangular} a la diferencia $\delta\alpha$,
 
 \begin{equation}
-  \sigma^2(\delta\alpha) = \sigma^2(\alpha_i) + \sigma^2(\alpha_{BP})
+  u^2(\delta\alpha) = u^2(\alpha_i) + u^2(\alpha_{BP})
   = \frac{\Delta\alpha_i^2 + \Delta\alpha_{BP}^2}{3},
   \qquad
-  \sigma^2(\alpha_{BP}) = \frac{\Delta\alpha_{BP}^2}{3}.
+  u^2(\alpha_{BP}) = \frac{\Delta\alpha_{BP}^2}{3}.
   \label{eq:reloj-sigma-dalpha}
 \end{equation}
 
@@ -311,7 +328,7 @@ durante el ensayo. Combinando las contribuciones independientes con
 \eqref{eq:reloj-rectangular},
 
 \begin{equation}
-  \sigma^2(\Delta T_i) = \left(\frac{UT_{cert}}{k}\right)^2
+  u^2(\Delta T_i) = \left(\frac{UT_{cert}}{k}\right)^2
   + \left(\frac{d_T/m_T}{\sqrt{3}}\right)^2
   + \frac{UT_{der}^2}{3} + \frac{\Delta t_A^2}{3}.
   \label{eq:reloj-sigma-deltaT}
@@ -322,7 +339,7 @@ $\Delta t = \max(\Delta t_1, \Delta t_2)$ como la máxima diferencia térmica en
 cuerpos, de modo que
 
 \begin{equation}
-  \sigma^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2
+  u^2(\delta T) = \left(\frac{UT_{cert}}{k}\right)^2
   + \frac{\Delta t^2}{3}
   + \left(\frac{d_T/m_T}{\sqrt{3}}\right)^2
   + \frac{UT_{der}^2}{3}.
@@ -335,10 +352,10 @@ comparador. Con $UT_{cert} = 0.5\ ^\circ\text{C}$, $k_T = 2$ y una fluctuación 
 $0.9\ ^\circ\text{C}$ durante el ensayo,
 
 \begin{align}
-  \sigma(\delta\alpha) &= \frac{\sqrt{2}\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
+  u(\delta\alpha) &= \frac{\sqrt{2}\times10^{-6}}{\sqrt{3}}\ ^\circ\text{C}^{-1}
   \approx 8.16\times10^{-7}\ ^\circ\text{C}^{-1},
   \label{eq:reloj-sigma-dalpha-valor} \\
-  \sigma(\Delta T_i) = \sigma(\delta T) &=
+  u(\Delta T_i) = u(\delta T) &=
   \sqrt{\left(\frac{0.5}{2}\right)^2 + \left(\frac{0.9}{\sqrt{3}}\right)^2}\ ^\circ\text{C}
   \approx 0.577\ ^\circ\text{C}.
   \label{eq:reloj-sigma-deltaT-valor}
@@ -347,7 +364,7 @@ $0.9\ ^\circ\text{C}$ durante el ensayo,
 La Tabla~\ref{tab:reloj-componentes} recoge las componentes de incertidumbre típica
 evaluadas en cada valor patrón de la serie.
 
-\input{c3-calibration/reloj-comparador/tablas/t4.tex}
+\input{c3-calibration/reloj-comparador/tablas/t5.tex}
 
 \subsubsection*{Varianza combinada de la indicación}
 
@@ -356,9 +373,9 @@ indicación es la suma en cuadratura de las
 ecuaciones~\eqref{eq:reloj-sigma-I} a~\eqref{eq:reloj-sigma-fuerza}:
 
 \begin{equation}
-  \sigma^2(\bar{I}) = \frac{s_R^2}{n}
-  + \sigma^2(\delta l_{cos}) + \sigma^2(\delta l_{res})
-  + \sigma^2(\delta l_{plan}) + \sigma^2(\delta l_{fuerza}).
+  u^2(\bar{I}) = \frac{s_R^2}{n}
+  + u^2(\delta l_{cos}) + u^2(\delta l_{res})
+  + u^2(\delta l_{plan}) + u^2(\delta l_{fuerza}).
   \label{eq:reloj-sigma-I-total}
 \end{equation}
 
@@ -375,11 +392,11 @@ $L_{BP}\,\alpha_{BP} = 0.115\ \mu\text{m}/^\circ\text{C}$, de modo que los dos �
 términos térmicos supervivientes de la ecuación~\eqref{eq:reloj-varianza} valen
 
 \begin{align}
-  [\bar I\,\Delta T_i]^2\sigma^2(\delta\alpha)
+  [\bar I\,\Delta T_i]^2u^2(\delta\alpha)
   &= (1.5\times10^{4} \times 8.16\times10^{-7})^2\ \mu\text{m}^2
   \approx 1.5\times10^{-4}\ \mu\text{m}^2,
   \label{eq:reloj-termino-dalpha} \\
-  [L_{BP}\,\alpha_{BP}]^2\sigma^2(\delta T)
+  [L_{BP}\,\alpha_{BP}]^2u^2(\delta T)
   &= (0.115 \times 0.577)^2\ \mu\text{m}^2
   \approx 4.4\times10^{-3}\ \mu\text{m}^2.
   \label{eq:reloj-termino-dT}
@@ -410,22 +427,21 @@ indicación queda, con factor de cobertura $k$, como
     \nonumber \\
   &\quad + \left[\bar{I} \, \Delta T_i\right]^2
     \left[ \frac{\Delta\alpha_i^2 + \Delta\alpha_{BP}^2}{3} \right]
-    + \left[\bar{I} \, \delta\alpha\right]^2 \sigma^2(\Delta T_i) \nonumber \\
+    + \left[\bar{I} \, \delta\alpha\right]^2 u^2(\Delta T_i) \nonumber \\
   &\quad + \left[L_{BP} \, \delta T\right]^2
     \frac{\Delta\alpha_{BP}^2}{3}
-    + \left[L_{BP} \, \alpha_{BP}\right]^2 \sigma^2(\delta T)
+    + \left[L_{BP} \, \alpha_{BP}\right]^2 u^2(\delta T)
   \Bigg\}^{1/2}.
   \label{eq:reloj-U}
 \end{align}
 
-Adoptando $k = 2$, correspondiente a un nivel de confianza bilateral aproximado del
-$95$\,\% \parencite{jcgm2008gum, inacal_pc014}, la
+Adoptando $k = 2$ \parencite{jcgm2008gum, inacal_pc014}, la
 ecuación~\eqref{eq:reloj-U} queda completamente determinada por las componentes
 anteriores y permite evaluar $U(E)$ punto a punto a lo largo del alcance del
 instrumento. El balance correspondiente al punto de $10$ mm se muestra en la
 Tabla~\ref{tab:reloj-balance}.
 
-\input{c3-calibration/reloj-comparador/tablas/t5.tex}
+\input{c3-calibration/reloj-comparador/tablas/t3.tex}
 
 \subsubsection{Resultados numéricos de la calibración}
 \label{sec:reloj-resultados}
@@ -436,23 +452,23 @@ varianza combinada del error en el punto de $10$ mm es
 
 \begin{equation}
   \begin{aligned}
-    \sigma_c^2(E) &= 0.140 + 0.0044 + 0.1933 + 0.3333 + 2.0833 + 0.0118 \\
+    u_c^2(E) &= 10.00 + 0.0044 + 0.1933 + 0.3333 + 2.0833 + 0.0118 \\
     &\quad + 1.5\times10^{-4} + 4.4\times10^{-3}\ \mu\text{m}^2
-    \approx 2.77\ \mu\text{m}^2,
+    \approx 12.63\ \mu\text{m}^2,
   \end{aligned}
   \label{eq:reloj-varianza-num}
 \end{equation}
 
 \begin{equation}
-  \therefore\quad \sigma_c(E) = \sqrt{2.77}\ \mu\text{m}
-  \approx 1.665\ \mu\text{m}.
+  \therefore\quad u_c(E) = \sqrt{12.63}\ \mu\text{m}
+  \approx 3.554\ \mu\text{m}.
   \label{eq:reloj-sigma-c-num-valor}
 \end{equation}
 
 Aplicando \eqref{eq:incertidumbre-expandida} con $k = 2$,
 
 \begin{equation}
-  \therefore\quad U(E) = 2 \times 1.665\ \mu\text{m} = 3.329\ \mu\text{m}.
+  \therefore\quad U(E) = 2 \times 3.554\ \mu\text{m} = 7.108\ \mu\text{m}.
   \label{eq:reloj-U-num-valor}
 \end{equation}
 
@@ -465,12 +481,12 @@ términos correctivos,
 
 \begin{equation}
   \begin{aligned}
-    \sigma_c^2(E,L) &=
-    \underbrace{0.140 + 0.0044 + 0.3333 + 2.0833 + 0.0118}_{2.573\ \mu\text{m}^2}
+    u_c^2(E,L) &=
+    \underbrace{10.00 + 0.0044 + 0.3333 + 2.0833 + 0.0118}_{12.433\ \mu\text{m}^2}
     \\[4pt]
     &\quad + \underbrace{\left[\frac{(1-\cos\theta)\,10^3}{2\sqrt{3}}\right]^2
-      + \left[10^3\,\Delta T_i\,\sigma(\delta\alpha)\right]^2
-      + \left[10^3\,\alpha_{BP}\,\sigma(\delta T)\right]^2}
+      + \left[10^3\,\Delta T_i\,u(\delta\alpha)\right]^2
+      + \left[10^3\,\alpha_{BP}\,u(\delta T)\right]^2}
       _{1.979\times10^{-3}\ \mu\text{m}^2/\text{mm}^2}\,L^2 .
   \end{aligned}
   \label{eq:reloj-sigma-c-L}
@@ -479,15 +495,15 @@ términos correctivos,
 Aplicando $k = 2$ \parencite{jcgm2008gum, inacal_pc014}, se obtiene la forma cerrada
 
 \begin{equation}
-  U(E,L) = \sqrt{10.29 + 7.91\times10^{-3}\,L^2}\ \mu\text{m},
+  U(E,L) = \sqrt{49.73 + 7.91\times10^{-3}\,L^2}\ \mu\text{m},
   \label{eq:reloj-U-vecL}
 \end{equation}
 
 con $L$ expresada en milímetros. El coeficiente del término cuadrático reúne el
 desalineamiento y las dos contribuciones térmicas: en el extremo del alcance ensayado
-($L = 10$ mm) aporta $0.198\ \mu\text{m}^2$ frente a los $2.573\ \mu\text{m}^2$ del
-término independiente. En consecuencia $U(E)$ crece suavemente de $3.21$ a
-$3.33\ \mu\text{m}$ entre $1$ y $10$ mm. La Figura~\ref{fig:reloj-error-U} muestra los
+($L = 10$ mm) aporta $0.198\ \mu\text{m}^2$ frente a los $12.433\ \mu\text{m}^2$ del
+término independiente. En consecuencia $U(E)$ crece suavemente de $7.05$ a
+$7.11\ \mu\text{m}$ entre $1$ y $10$ mm. La Figura~\ref{fig:reloj-error-U} muestra los
 errores de indicación de la Tabla~\ref{tab:reloj-ascenso} junto con sus barras de
 incertidumbre.
 
@@ -501,9 +517,9 @@ incertidumbre.
   xlabel={valor patrón $VP$ (mm)},
   ylabel={error de indicación $E$ (µm)},
   xmin=0.3, xmax=10.7,
-  ymin=-4, ymax=9,
+  ymin=-2, ymax=27,
   xtick={2,4,6,8,10},
-  ytick={-2,0,2,4,6,8},
+  ytick={0,5,10,15,20,25},
   axis lines*=left,
   grid=major,
   grid style={gray!25},
@@ -522,28 +538,28 @@ incertidumbre.
   error bars/y explicit,
 ] table[x=VP, y=E, y error=U] {
   VP    E     U
-  1     3     3.21
-  2     5     3.21
-  3     1     3.22
-  4     2     3.23
-  5     4     3.24
-  6     0     3.25
-  7     3     3.27
-  8     0     3.29
-  9     1     3.31
-  10    2     3.33
+  1     0     7.05
+  2     20    7.05
+  3     10    7.06
+  4     10    7.06
+  5     10    7.07
+  6     20    7.07
+  7     0     7.08
+  8     20    7.09
+  9     0     7.10
+  10    0     7.11
 };
 \addlegendentry{$E \pm U$ ($k=2$)}
-\node[above=4pt, font=\scriptsize] at (axis cs:1,3)   {3};
-\node[above=4pt, font=\scriptsize] at (axis cs:2,5)   {5};
-\node[above=4pt, font=\scriptsize] at (axis cs:3,1)   {1};
-\node[above=4pt, font=\scriptsize] at (axis cs:4,2)   {2};
-\node[above=4pt, font=\scriptsize] at (axis cs:5,4)   {4};
-\node[above=4pt, font=\scriptsize] at (axis cs:6,0)   {0};
-\node[above=4pt, font=\scriptsize] at (axis cs:7,3)   {3};
-\node[above=4pt, font=\scriptsize] at (axis cs:8,0)   {0};
-\node[above=4pt, font=\scriptsize] at (axis cs:9,1)   {1};
-\node[above=4pt, font=\scriptsize] at (axis cs:10,2)  {2};
+\node[above=4pt, font=\scriptsize] at (axis cs:1,0)   {0};
+\node[above=4pt, font=\scriptsize] at (axis cs:2,20)  {20};
+\node[above=4pt, font=\scriptsize] at (axis cs:3,10)  {10};
+\node[above=4pt, font=\scriptsize] at (axis cs:4,10)  {10};
+\node[above=4pt, font=\scriptsize] at (axis cs:5,10)  {10};
+\node[above=4pt, font=\scriptsize] at (axis cs:6,20)  {20};
+\node[above=4pt, font=\scriptsize] at (axis cs:7,0)   {0};
+\node[above=4pt, font=\scriptsize] at (axis cs:8,20)  {20};
+\node[above=4pt, font=\scriptsize] at (axis cs:9,0)   {0};
+\node[above=4pt, font=\scriptsize] at (axis cs:10,0)  {0};
 \end{axis}
 \end{tikzpicture}
 \caption{Error de indicación del reloj comparador e incertidumbre expandida ($k=2$)

@@ -20,7 +20,7 @@ def main() -> None:
     ind = df[IND].to_numpy(dtype=float)
     e = (ind - vp) * 1000
     df[VP] = [f"{x:.3f}" for x in vp]
-    df[IND] = [f"{x:.3f}" for x in ind]
+    df[IND] = [f"{x:.2f}" for x in ind]
     df[E] = [f"{x:.0f}" for x in e]
     df.to_csv(CSV, index=False)
 
